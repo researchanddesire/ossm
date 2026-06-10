@@ -1,0 +1,10 @@
+# Research and Desire — OSSM License and Copyright Notices
+
+OSSM (Open Source Sex Machine) firmware and hardware are (c) Research and Desire.
+
+All paths in this repository are available under **CERN-OHL-S v2** (strongly reciprocal). Full text: [`LICENSES/CERN-OHL-S-2.0.txt`](LICENSES/CERN-OHL-S-2.0.txt).
+
+1. Hardware at `./hardware/**/cad`, `./hardware/**/pcb`, `./hardware/**/cables` → CERN-OHL-S v2
+2. Firmware at `./src`, `./include`, `./lib`, `./components`, `./test`, `./developer-docs`, root build configs → CERN-OHL-S v2
+3. CI at `./.github/workflows` → CERN-OHL-S v2
+4. Research and Desire / OSSM branding → all rights reserved; remove from derivatives

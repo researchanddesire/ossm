@@ -1,0 +1,13 @@
+site_name: OSSM Developer Docs
+site_url: https://dev.researchanddesire.com/ossm/
+repo_url: https://github.com/researchanddesire/ossm
+repo_name: ossm
+
+theme:
+  name: material
+
+nav:
+  - Overview: index.md
+
+markdown_extensions:
+  - admonition

@@ -6,7 +6,7 @@ description: "Understand and customize OSSM firmware configuration parameters fo
 The OSSM firmware uses a set of configuration constants that define motion limits, hardware properties, and user preferences. This reference documents all configurable parameters and how to modify them for custom builds.
 
 !!! warning
-Modifying configuration values incorrectly can damage your hardware or cause unsafe operation. Only change values if you understand their effects and have verified your hardware specifications.
+    Modifying configuration values incorrectly can damage your hardware or cause unsafe operation. Only change values if you understand their effects and have verified your hardware specifications.
 
 ## Motion system configuration
 
@@ -20,7 +20,7 @@ These parameters define how the OSSM moves and are found in `src/constants/Confi
 | `maxAcceleration` | 10000.0 | mm/s² | Maximum acceleration/deceleration rate |
 
 !!! info
-These limits apply to all operating modes. The actual speed achieved depends on your motor, power supply, and mechanical setup.
+    These limits apply to all operating modes. The actual speed achieved depends on your motor, power supply, and mechanical setup.
 
 ### Motor configuration
 
@@ -38,7 +38,7 @@ stepsPerMM = motorStepPerRevolution / (pulleyToothCount * beltPitchMm)
 ```
 
 !!! tip
-If you're using different hardware (e.g., a 16-tooth pulley or GT3 belt), update these values to match. Incorrect values cause the firmware to miscalculate positions.
+    If you're using different hardware (e.g., a 16-tooth pulley or GT3 belt), update these values to match. Incorrect values cause the firmware to miscalculate positions.
 
 ### Stroke limits
 
@@ -48,7 +48,7 @@ If you're using different hardware (e.g., a 16-tooth pulley or GT3 belt), update
 | `minStrokeLengthMm` | 50.0 | mm | Minimum stroke to pass homing validation |
 
 !!! note
-`maxStrokeSteps` defines the absolute maximum travel. Set this to your rail length minus the linear block holder (75mm on standard OSSM) minus a 20mm safety margin.
+    `maxStrokeSteps` defines the absolute maximum travel. Set this to your rail length minus the linear block holder (75mm on standard OSSM) minus a 20mm safety margin.
 
 ### Homing configuration
 
@@ -68,25 +68,18 @@ These parameters fine-tune firmware behavior and are found in `Config::Advanced`
 | `commandDeadZonePercentage` | 1.0 | % | Potentiometer dead zone to prevent noise |
 | `accelerationScaling` | 100.0 | - | Affects motion aggressiveness in Simple Penetration |
 
-<AccordionGroup>
 ??? note "strokeZeroOffsetMm"
-
-After homing, the actuator backs off from the physical endstop by this distance. This prevents the actuator from repeatedly hitting the endstop during normal operation.
+    After homing, the actuator backs off from the physical endstop by this distance. This prevents the actuator from repeatedly hitting the endstop during normal operation.
 
 ??? note "commandDeadZonePercentage"
-
-Analog potentiometers can produce noisy readings near zero. This dead zone ensures the speed knob registers as "zero" when turned fully counterclockwise, even if the electrical reading is slightly above 0%.
+    Analog potentiometers can produce noisy readings near zero. This dead zone ensures the speed knob registers as "zero" when turned fully counterclockwise, even if the electrical reading is slightly above 0%.
 
 ??? note "accelerationScaling"
-
-In Simple Penetration mode, acceleration is calculated as:
-```cpp
-acceleration = maxSpeedMmPerSecond * speed * speed / accelerationScaling
-```
-Higher values produce gentler acceleration curves.
-
-</AccordionGroup>
-
+    In Simple Penetration mode, acceleration is calculated as:
+    ```cpp
+    acceleration = maxSpeedMmPerSecond * speed * speed / accelerationScaling
+    ```
+    Higher values produce gentler acceleration curves.
 ## User configuration
 
 User preferences are defined in `src/constants/UserConfig.h`.
@@ -102,7 +95,7 @@ Available languages:
 - `fr` — French
 
 !!! note
-Language selection currently requires recompiling the firmware. A runtime language selector is planned for future releases.
+    Language selection currently requires recompiling the firmware. A runtime language selector is planned for future releases.
 
 ### Display units
 
@@ -147,7 +140,7 @@ Hardware pins are defined in `src/constants/Pins.h`. Modify these if you're buil
 
 ### GPIO expansion pins
 
-These pins are available for accessories via [BLE GPIO control](/ossm/Software/communication/gpio):
+These pins are available for accessories via [BLE GPIO control](/ossm/communication/gpio):
 
 | Logical Pin | GPIO | Description |
 |-------------|------|-------------|
@@ -158,9 +151,7 @@ These pins are available for accessories via [BLE GPIO control](/ossm/Software/c
 
 ## Modifying configuration
 
-
 ### Step 1: Clone the repository
-
 
 If you haven't already, clone the OSSM firmware repository:
 
@@ -171,7 +162,6 @@ cd OSSM-hardware/Software
 
 ### Step 2: Edit configuration files
 
-
 Open the relevant configuration file in your editor:
 
 - `src/constants/Config.h` — Motion and advanced parameters
@@ -180,27 +170,19 @@ Open the relevant configuration file in your editor:
 
 ### Step 3: Rebuild and upload
 
-
 Use PlatformIO to compile and upload the modified firmware:
 
 1. Click the **Build** button to verify your changes compile
 2. Click **Upload** to flash the new firmware
 
 !!! success
-After uploading, the OSSM will restart and use your new configuration.
-
+    After uploading, the OSSM will restart and use your new configuration.
 
 !!! warning
-Always test configuration changes carefully. Start with low speeds and verify homing completes successfully before normal operation.
+    Always test configuration changes carefully. Start with low speeds and verify homing completes successfully before normal operation.
 
 ## Related pages
 
-<CardGroup cols={2}>
-<Card title="PlatformIO Setup" icon="wrench" href="/ossm/Software/getting-started/PlatformIO">
-  Set up your development environment to modify and upload firmware.
-</Card>
+- **[PlatformIO Setup](/ossm/getting-started/PlatformIO)** — Set up your development environment to modify and upload firmware.
 
-<Card title="Safety Features" icon="shield" href="/ossm/Software/getting-started/safety-features">
-  Understand how configuration values affect safety systems.
-</Card>
-</CardGroup>
+- **[Safety Features](/ossm/getting-started/safety-features)** — Understand how configuration values affect safety systems.

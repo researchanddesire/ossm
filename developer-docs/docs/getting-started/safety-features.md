@@ -6,7 +6,7 @@ description: "Understand the safety mechanisms built into OSSM firmware to prote
 The OSSM firmware includes several safety features designed to prevent accidents, protect hardware, and ensure predictable operation. This guide explains each safety mechanism and how it works.
 
 !!! warning
-Safety features are a supplement to—not a replacement for—safe usage practices. Always follow the [safety guidance](/ossm/guides/housekeeping/safety/guidance) when operating your OSSM.
+    Safety features are a supplement to—not a replacement for—safe usage practices. Always follow the [safety guidance](/ossm/guides/housekeeping/safety/guidance) when operating your OSSM.
 
 ## Preflight safety check
 
@@ -34,7 +34,7 @@ Decrease the speed to begin playing.
 You cannot bypass the preflight check. The mode will not start until the speed knob is near zero. This ensures you always begin at a safe speed and consciously increase it.
 
 !!! tip
-If the preflight screen appears, simply turn your speed knob fully counterclockwise. The mode will start within a second once the reading drops below the threshold.
+    If the preflight screen appears, simply turn your speed knob fully counterclockwise. The mode will start within a second once the reading drops below the threshold.
 
 ### Exiting preflight
 
@@ -68,7 +68,7 @@ The ease-in-out-sine curve provides smooth deceleration:
 This feels more natural than linear deceleration and reduces mechanical stress.
 
 !!! note
-If the speed was already zero when the connection dropped, no ramp occurs—the device simply continues at rest.
+    If the speed was already zero when the connection dropped, no ramp occurs—the device simply continues at rest.
 
 ### Manual override
 
@@ -102,7 +102,7 @@ Homing must complete within **40 seconds**. If the actuator hasn't found both en
 The OSSM uses sensorless homing—it detects end-of-travel by monitoring motor current. When current exceeds `sensorlessCurrentLimit` (default: 1.5%), the firmware knows the actuator has reached a physical stop.
 
 !!! info
-Sensorless homing eliminates the need for limit switches while still detecting mechanical boundaries reliably.
+    Sensorless homing eliminates the need for limit switches while still detecting mechanical boundaries reliably.
 
 ### Minimum stroke validation
 
@@ -142,7 +142,7 @@ At any time during operation, you can trigger an immediate stop.
 4. You return to the main menu
 
 !!! warning
-Emergency stop causes the OSSM to lose its position reference. You must restart and re-home before operating again.
+    Emergency stop causes the OSSM to lose its position reference. You must restart and re-home before operating again.
 
 ### When to use
 
@@ -154,7 +154,7 @@ Use emergency stop when:
 - You hear unusual sounds from the mechanical system
 
 !!! note
-Don't hesitate to use emergency stop—it's there for your safety. Re-homing only takes a few seconds.
+    Don't hesitate to use emergency stop—it's there for your safety. Re-homing only takes a few seconds.
 
 ## Error states
 
@@ -190,16 +190,10 @@ Several configuration parameters affect safety behavior:
 | `strokeZeroOffsetMm` | 6mm | Safety buffer from physical endstops |
 
 !!! warning
-Modifying these values can reduce safety margins. Only change them if you understand the implications and have tested thoroughly.
+    Modifying these values can reduce safety margins. Only change them if you understand the implications and have tested thoroughly.
 
 ## Related pages
 
-<CardGroup cols={2}>
-<Card title="Troubleshooting" icon="wrench" href="/ossm/guides/getting-started/user-guide/troubleshooting">
-  Diagnose and resolve common issues with your OSSM.
-</Card>
+- **[Troubleshooting](/ossm/guides/getting-started/user-guide/troubleshooting)** — Diagnose and resolve common issues with your OSSM.
 
-<Card title="Configuration Reference" icon="sliders" href="/ossm/Software/getting-started/configuration">
-  Understand all configurable parameters and their defaults.
-</Card>
-</CardGroup>
+- **[Configuration Reference](/ossm/getting-started/configuration)** — Understand all configurable parameters and their defaults.

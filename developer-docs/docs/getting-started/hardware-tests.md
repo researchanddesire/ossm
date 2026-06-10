@@ -6,12 +6,12 @@ description: "Run on-device tests to verify OSSM peripherals, state machine, BLE
 Hardware tests run directly on a real OSSM connected over USB. They use the Unity test framework through PlatformIO's `hw_test` environment, which builds the full firmware source and flashes each test suite to the board.
 
 !!! note
-These are not the unit tests that run on your computer (`pio test -e test`). Hardware tests require a physical OSSM plugged in and powered on.
+    These are not the unit tests that run on your computer (`pio test -e test`). Hardware tests require a physical OSSM plugged in and powered on.
 
 ## Prerequisites
 
 - OSSM connected via USB data cable
-- PlatformIO installed ([setup guide](/ossm/Software/getting-started/PlatformIO))
+- PlatformIO installed ([setup guide](/ossm/getting-started/PlatformIO))
 - Device powered on (some tests exercise the motor, BLE radio, or WiFi)
 
 ## Running tests
@@ -42,7 +42,7 @@ PlatformIO compiles the test, flashes it to the board, and streams the Unity out
 | `test_hw_wifi` | WiFi init, NVS credential storage, WiFi status JSON, BLE WiFi characteristic, bad-credentials handling | No | ~15s |
 
 !!! warning
-`test_hw_homing` commands the motor. Make sure the linear rail is clear and the device is properly mounted before running it.
+    `test_hw_homing` commands the motor. Make sure the linear rail is clear and the device is properly mounted before running it.
 
 ## Recommended order
 

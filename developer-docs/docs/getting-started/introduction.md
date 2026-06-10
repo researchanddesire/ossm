@@ -11,53 +11,49 @@ The Open Source Sex Machine (OSSM) firmware is an ESP32-based control system tha
 
 The OSSM firmware relies on four key technologies that work together to deliver responsive, reliable motion control.
 
-<AccordionGroup>
-<Accordion title="State Machine - Boost SML" icon="diagram-project">
-[Boost SML](https://boost-ext.github.io/sml/) (State Machine Language) is a header-only C++ library that provides a domain-specific language for defining state machines.
+??? note "State Machine - Boost SML"
+    [Boost SML](https://boost-ext.github.io/sml/) (State Machine Language) is a header-only C++ library that provides a domain-specific language for defining state machines.
 
-**Why we use it:**
-- Compile-time state machine verification catches errors before runtime
-- Zero runtime overhead compared to manual switch/case implementations
-- Clean, declarative syntax makes complex state transitions readable
-- Handles transitions between states like idle, running, error, and homing
+    **Why we use it:**
+    - Compile-time state machine verification catches errors before runtime
+    - Zero runtime overhead compared to manual switch/case implementations
+    - Clean, declarative syntax makes complex state transitions readable
+    - Handles transitions between states like idle, running, error, and homing
 
-The state machine governs the device's operational modes, ensuring safe transitions and predictable behavior. For details, see the [State Machine Architecture](/ossm/Software/architecture/state-machine) documentation.
+    The state machine governs the device's operational modes, ensuring safe transitions and predictable behavior. For details, see the [State Machine Architecture](/ossm/architecture/state-machine) documentation.
 
-<Accordion title="Display - U8G2 Library" icon="display">
-[U8G2](https://github.com/olikraus/u8g2) is a monochrome graphics library optimized for embedded systems and OLED displays.
+??? note "Display - U8G2 Library"
+    [U8G2](https://github.com/olikraus/u8g2) is a monochrome graphics library optimized for embedded systems and OLED displays.
 
-**Why we use it:**
-- Supports a wide range of display controllers including SSD1306 and SH1106
-- Minimal memory footprint suitable for ESP32's constrained RAM
-- Built-in font rendering with multiple sizes and styles
-- Hardware-accelerated drawing for smooth UI updates
+    **Why we use it:**
+    - Supports a wide range of display controllers including SSD1306 and SH1106
+    - Minimal memory footprint suitable for ESP32's constrained RAM
+    - Built-in font rendering with multiple sizes and styles
+    - Hardware-accelerated drawing for smooth UI updates
 
-U8G2 renders the on-device interface including speed, depth, pattern selection, and system status.
+    U8G2 renders the on-device interface including speed, depth, pattern selection, and system status.
 
-<Accordion title="Task Management - FreeRTOS" icon="layer-group">
-[FreeRTOS](https://www.freertos.org/) is a real-time operating system kernel that enables multitasking on embedded devices.
+??? note "Task Management - FreeRTOS"
+    [FreeRTOS](https://www.freertos.org/) is a real-time operating system kernel that enables multitasking on embedded devices.
 
-**Why we use it:**
-- Runs multiple concurrent tasks (motion control, display updates, input handling)
-- Priority-based scheduling ensures time-critical motion tasks execute reliably
-- Inter-task communication via queues and semaphores
-- Integrated into the ESP32 Arduino framework by default
+    **Why we use it:**
+    - Runs multiple concurrent tasks (motion control, display updates, input handling)
+    - Priority-based scheduling ensures time-critical motion tasks execute reliably
+    - Inter-task communication via queues and semaphores
+    - Integrated into the ESP32 Arduino framework by default
 
-FreeRTOS allows the firmware to simultaneously process user input, update the display, and maintain precise motor timing.
+    FreeRTOS allows the firmware to simultaneously process user input, update the display, and maintain precise motor timing.
 
-<Accordion title="Motion Control - StrokeEngine" icon="wave-pulse">
-[StrokeEngine](https://github.com/theelims/StrokeEngine) is a motion pattern library created by theelims, modified for OSSM-specific requirements.
+??? note "Motion Control - StrokeEngine"
+    [StrokeEngine](https://github.com/theelims/StrokeEngine) is a motion pattern library created by theelims, modified for OSSM-specific requirements.
 
-**Why we use it:**
-- Generates smooth, customizable motion patterns with configurable speed and depth
-- Supports multiple pattern types (constant, random, oscillating, and more)
-- Handles acceleration ramping for motor protection
-- Provides real-time parameter adjustment without motion interruption
+    **Why we use it:**
+    - Generates smooth, customizable motion patterns with configurable speed and depth
+    - Supports multiple pattern types (constant, random, oscillating, and more)
+    - Handles acceleration ramping for motor protection
+    - Provides real-time parameter adjustment without motion interruption
 
-StrokeEngine translates user settings into precise motor commands, enabling the variety of motion patterns available in OSSM.
-
-</AccordionGroup>
-
+    StrokeEngine translates user settings into precise motor commands, enabling the variety of motion patterns available in OSSM.
 ## Getting Started
 
 Set up your development environment by following these steps.
@@ -69,9 +65,7 @@ Before you begin, ensure you have:
 - Git installed on your system
 - An internet connection to download dependencies
 
-
 ### Step 1: Install VS Code and PlatformIO
-
 
 Download and install [Visual Studio Code](https://code.visualstudio.com/), then add the PlatformIO extension.
 
@@ -82,43 +76,37 @@ Download and install [Visual Studio Code](https://code.visualstudio.com/), then 
 5. Restart VS Code when prompted
 
 !!! tip
-For detailed PlatformIO setup instructions, see our [PlatformIO setup guide](/ossm/Software/getting-started/PlatformIO).
-
+    For detailed PlatformIO setup instructions, see our [PlatformIO setup guide](/ossm/getting-started/PlatformIO).
 
 ### Step 2: Clone the repository
 
-
 Open a terminal and clone the OSSM repository to your local machine.
 
-<Tabs>
-<Tab title="HTTPS">
+**HTTPS**
+
 ```bash
 git clone https://github.com/KinkyMakers/OSSM-hardware.git
 cd OSSM-hardware/Software
 ```
-</Tab>
 
-<Tab title="SSH">
+**SSH**
+
 ```bash
 git clone git@github.com:KinkyMakers/OSSM-hardware.git
 cd OSSM-hardware/Software
 ```
-</Tab>
 
-<Tab title="GitHub CLI">
+**GitHub CLI**
+
 ```bash
 gh repo clone KinkyMakers/OSSM-hardware
 cd OSSM-hardware/Software
 ```
-</Tab>
-</Tabs>
 
 !!! note
-If you plan to contribute changes, fork the repository first, then clone your fork instead.
-
+    If you plan to contribute changes, fork the repository first, then clone your fork instead.
 
 ### Step 3: Open the project in VS Code
-
 
 Launch the project using PlatformIO.
 
@@ -130,11 +118,9 @@ Launch the project using PlatformIO.
 PlatformIO automatically detects the `platformio.ini` file and configures the project.
 
 !!! success
-You should see the PlatformIO toolbar appear at the bottom of VS Code with build, upload, and monitor buttons.
-
+    You should see the PlatformIO toolbar appear at the bottom of VS Code with build, upload, and monitor buttons.
 
 ### Step 4: Build and upload the firmware
-
 
 Compile the project and flash it to your ESP32.
 
@@ -143,33 +129,18 @@ Compile the project and flash it to your ESP32.
 3. Once the build succeeds, click **PlatformIO: Upload** (arrow icon) to flash the firmware
 
 !!! warning
-Ensure you select the correct COM port if you have multiple serial devices connected. You can configure this in `platformio.ini` or through the PlatformIO device monitor.
-
+    Ensure you select the correct COM port if you have multiple serial devices connected. You can configure this in `platformio.ini` or through the PlatformIO device monitor.
 
 ## Next Steps
 
-<CardGroup cols={2}>
-<Card title="Operating Modes" icon="play" href="/ossm/Software/getting-started/operating-modes">
-  Learn about Simple Penetration, Stroke Engine, and Streaming modes.
-</Card>
+- **[Operating Modes](/ossm/getting-started/operating-modes)** — Learn about Simple Penetration, Stroke Engine, and Streaming modes.
 
-<Card title="Safety Features" icon="shield" href="/ossm/Software/getting-started/safety-features">
-  Understand preflight checks, disconnect safety, and emergency stop.
-</Card>
+- **[Safety Features](/ossm/getting-started/safety-features)** — Understand preflight checks, disconnect safety, and emergency stop.
 
-<Card title="Configuration" icon="sliders" href="/ossm/Software/getting-started/configuration">
-  Customize motion parameters, pins, and user preferences.
-</Card>
+- **[Configuration](/ossm/getting-started/configuration)** — Customize motion parameters, pins, and user preferences.
 
-<Card title="WiFi and Updates" icon="wifi" href="/ossm/Software/getting-started/wifi-and-updates">
-  Configure WiFi and install over-the-air firmware updates.
-</Card>
+- **[WiFi and Updates](/ossm/getting-started/wifi-and-updates)** — Configure WiFi and install over-the-air firmware updates.
 
-<Card title="Folder Structure" icon="folder-tree" href="/ossm/Software/architecture/folder-structure">
-  Understand the source code organization and modular architecture.
-</Card>
+- **[Folder Structure](/ossm/architecture/folder-structure)** — Understand the source code organization and modular architecture.
 
-<Card title="PlatformIO Setup" icon="wrench" href="/ossm/Software/getting-started/PlatformIO">
-  Set up your development environment for firmware modifications.
-</Card>
-</CardGroup>
+- **[PlatformIO Setup](/ossm/getting-started/PlatformIO)** — Set up your development environment for firmware modifications.

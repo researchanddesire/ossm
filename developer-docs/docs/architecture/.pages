@@ -1,0 +1,4 @@
+title: Architecture
+nav:
+  - folder-structure.md
+  - state-machine.md

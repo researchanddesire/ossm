@@ -134,7 +134,7 @@ For example:
 This reads as: "When in `menu.idle` state and a `buttonPress` event occurs, if the guard `isOption(Menu::SimplePenetration)` returns true, transition to `simplePenetration` state."
 
 !!! info
-For a complete tutorial on transition table syntax, see the [Boost.SML Tutorial](https://boost-ext.github.io/sml/tutorial.html).
+    For a complete tutorial on transition table syntax, see the [Boost.SML Tutorial](https://boost-ext.github.io/sml/tutorial.html).
 
 ## Events
 
@@ -165,7 +165,7 @@ stateMachine->process_event(Done{});
 The state machine is initialized at startup in [`state.cpp`](https://github.com/KinkyMakers/OSSM-hardware/blob/main/Software/src/ossm/state/state.cpp) and exposed as a global pointer.
 
 !!! tip
-Events are defined as empty structs. The type itself carries the meaning - no data payload is needed.
+    Events are defined as empty structs. The type itself carries the meaning - no data payload is needed.
 
 ## Guards
 
@@ -194,7 +194,7 @@ namespace guards {
     constexpr auto isPreflightSafe = []() { 
         return ossmIsPreflightSafe(); 
     };
-    
+
     // Parameterized guard using nested lambda
     constexpr auto isOption = [](Menu option) {
         return [option]() { return ossmGetMenuOption() == option; };
@@ -205,7 +205,7 @@ namespace guards {
 The actual logic lives in `guards.cpp`, keeping compile times fast and allowing implementation changes without recompiling the transition table.
 
 !!! info
-For more on guard patterns, see the [Boost.SML Guards documentation](https://boost-ext.github.io/sml/user-guide.html#guards).
+    For more on guard patterns, see the [Boost.SML Guards documentation](https://boost-ext.github.io/sml/user-guide.html#guards).
 
 ## Actions
 
@@ -288,10 +288,10 @@ void ossmDrawHello() {
 This pattern keeps the state machine decoupled from specific implementations and allows feature modules to be developed independently.
 
 !!! warning
-Actions must not block the main thread. Long-running operations should spawn FreeRTOS tasks instead.
+    Actions must not block the main thread. Long-running operations should spawn FreeRTOS tasks instead.
 
 !!! info
-For more on action patterns, see the [Boost.SML Actions documentation](https://boost-ext.github.io/sml/user-guide.html#actions).
+    For more on action patterns, see the [Boost.SML Actions documentation](https://boost-ext.github.io/sml/user-guide.html#actions).
 
 ## Thread Safety
 
@@ -321,7 +321,7 @@ void initStateMachine() {
 ```
 
 !!! info
-For more on thread safety policies, see the [Boost.SML Policies documentation](https://boost-ext.github.io/sml/user-guide.html#policies).
+    For more on thread safety policies, see the [Boost.SML Policies documentation](https://boost-ext.github.io/sml/user-guide.html#policies).
 
 ## State Logging
 
@@ -343,26 +343,16 @@ The state machine follows a **decoupled modular architecture**:
 - **Global state structs** manage application state instead of class members
 
 !!! note
-The `OSSM` class in `ossm/OSSM.h` is retained for backward compatibility with BLE command handling. New features should use stateless namespace functions that operate on global state.
+    The `OSSM` class in `ossm/OSSM.h` is retained for backward compatibility with BLE command handling. New features should use stateless namespace functions that operate on global state.
 
-For a complete overview of the source code organization, see [Folder Structure](/ossm/Software/architecture/folder-structure).
+For a complete overview of the source code organization, see [Folder Structure](/ossm/architecture/folder-structure).
 
 ## Further Reading
 
-<CardGroup cols={2}>
-<Card title="Folder Structure" icon="folder-tree" href="/ossm/Software/architecture/folder-structure">
-  Understand the source code organization and design philosophy.
-</Card>
+- **[Folder Structure](/ossm/architecture/folder-structure)** — Understand the source code organization and design philosophy.
 
-<Card title="Boost.SML Tutorial" icon="graduation-cap" href="https://boost-ext.github.io/sml/tutorial.html">
-  Step-by-step guide to building state machines with Boost.SML.
-</Card>
+- **[Boost.SML Tutorial](https://boost-ext.github.io/sml/tutorial.html)** — Step-by-step guide to building state machines with Boost.SML.
 
-<Card title="Boost.SML User Guide" icon="book" href="https://boost-ext.github.io/sml/user-guide.html">
-  Complete reference for all Boost.SML features.
-</Card>
+- **[Boost.SML User Guide](https://boost-ext.github.io/sml/user-guide.html)** — Complete reference for all Boost.SML features.
 
-<Card title="Operating Modes" icon="play" href="/ossm/Software/getting-started/operating-modes">
-  Learn about Simple Penetration, Stroke Engine, and Streaming modes.
-</Card>
-</CardGroup>
+- **[Operating Modes](/ossm/getting-started/operating-modes)** — Learn about Simple Penetration, Stroke Engine, and Streaming modes.

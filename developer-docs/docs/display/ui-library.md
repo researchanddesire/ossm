@@ -5,7 +5,7 @@ description: "Pure rendering library for OSSM display screens — TextPages, str
 
 ## Overview
 
-The `lib/ui` library is a **pure rendering layer** that draws OSSM screens into a U8g2 buffer. It has no hardware dependencies, no FreeRTOS, no mutexes — it takes a `u8g2_t*` pointer and draws pixels. Thread safety and display I/O are handled by the [display service](/ossm/Software/display/display-service).
+The `lib/ui` library is a **pure rendering layer** that draws OSSM screens into a U8g2 buffer. It has no hardware dependencies, no FreeRTOS, no mutexes — it takes a `u8g2_t*` pointer and draws pixels. Thread safety and display I/O are handled by the [display service](/ossm/display/display-service).
 
 This separation means the library can run on native (x86) for automated visual testing without an ESP32.
 
@@ -238,7 +238,7 @@ pio test -e test -f test_display
 ```
 
 !!! note
-ImageMagick (`magick`) must be installed for PNG conversion. Without it, PBM files are still generated but PNGs are skipped.
+    ImageMagick (`magick`) must be installed for PNG conversion. Without it, PBM files are still generated but PNGs are skipped.
 
 ### How it works
 

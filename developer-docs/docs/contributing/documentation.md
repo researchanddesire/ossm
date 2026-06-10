@@ -8,23 +8,19 @@ description: "Learn how to contribute to the OSSM documentation using Mintlify, 
 The OSSM documentation is built with [Mintlify](https://www.mintlify.com/docs), a modern documentation platform that makes it easy to create beautiful, interactive docs.
 
 !!! info
-All changes to the `Documentation/ossm` directory are automatically deployed to [https://www.researchanddesire.com/ossm](https://www.researchanddesire.com/ossm) after merging to the main branch.
+    All changes to the `Documentation/ossm` directory are automatically deployed to [https://www.researchanddesire.com/ossm](https://www.researchanddesire.com/ossm) after merging to the main branch.
 
 ## Documentation Platform
 
 This documentation uses **Mintlify** for rendering and deployment. For detailed information about available components, formatting options, and best practices, visit the official Mintlify documentation:
 
-<Card title="Mintlify Documentation" icon="book" href="https://www.mintlify.com/docs">
-  Complete guide to Mintlify features, components, and configuration
-</Card>
+- **[Mintlify Documentation](https://www.mintlify.com/docs)** — Complete guide to Mintlify features, components, and configuration
 
 ## Local Development Setup
 
 To preview documentation changes locally before submitting a pull request:
 
-
 ### Step 1: Navigate to the Documentation directory
-
 
 ```bash
 cd Documentation
@@ -32,13 +28,11 @@ cd Documentation
 
 ### Step 2: Install dependencies
 
-
 ```bash
 pnpm i
 ```
 
 ### Step 3: Start the local preview server
-
 
 ```bash
 pnpm mint
@@ -48,7 +42,6 @@ This starts a local development server with hot-reload enabled.
 
 ### Step 4: View the preview
 
-
 Open your browser and navigate to:
 
 ```
@@ -56,17 +49,16 @@ http://localhost:3333
 ```
 
 !!! success
-The preview updates automatically as you edit MDX files.
-
+    The preview updates automatically as you edit MDX files.
 
 !!! warning
-The Mintlify web editor is **not available** for this project. All editing must be done locally using your preferred text editor.
+    The Mintlify web editor is **not available** for this project. All editing must be done locally using your preferred text editor.
 
 ### Local Preview
 
 Once you have the local server running, you'll see the full documentation site with navigation, search, and all Mintlify features:
 
-![Local documentation preview](./ossm/_images/local-preview.webp)
+![Local documentation preview](./_images/local-preview.webp)
 
 The preview includes the complete navigation sidebar, showing all sections including the new "Contributing" section under the Software tab.
 
@@ -88,8 +80,9 @@ description: "Brief description for SEO and previews"
 
 Regular Markdown content works here.
 
-!!! info
+<Info>
 You can use Mintlify components like this.
+</Info>
 
 ## Another Section
 
@@ -100,8 +93,7 @@ More content here...
 
 Images should be **co-located** with the documentation that uses them:
 
-<CodeGroup>
-```plaintext Structure
+```plaintext
 ossm/Software/communication/
 ├── ble.mdx
 ├── gpio.mdx
@@ -109,10 +101,8 @@ ossm/Software/communication/
     ├── ble-diagram.png
     └── gpio-pinout.jpg
 ```
-</CodeGroup>
-
 !!! tip
-Don't worry about image optimization—images are automatically optimized during the deployment process.
+    Don't worry about image optimization—images are automatically optimized during the deployment process.
 
 ## React Snippets
 
@@ -128,72 +118,67 @@ Documentation/snippets/ossm/
 
 ### Snippet Requirements
 
-<AccordionGroup>
-<Accordion title="Pure React Only" icon="react">
-Snippets must use **pure React** with no external frameworks or build tools. The React version is provided by the Mintlify runtime.
+??? note "Pure React Only"
+    Snippets must use **pure React** with no external frameworks or build tools. The React version is provided by the Mintlify runtime.
 
-```jsx
-// ✅ Good - Pure React
-import { useState } from 'react';
+    ```jsx
+    // ✅ Good - Pure React
+    import { useState } from 'react';
 
-export const Counter = () => {
-  const [count, setCount] = useState(0);
-  return <button onClick={() => setCount(count + 1)}>Count: {count}</button>;
-};
-```
+    export const Counter = () => {
+      const [count, setCount] = useState(0);
+      return <button onClick={() => setCount(count + 1)}>Count: {count}</button>;
+    };
+    ```
 
-```jsx
-// ❌ Bad - External dependencies
-import { useQuery } from 'react-query';
-import axios from 'axios';
-```
+    ```jsx
+    // ❌ Bad - External dependencies
+    import { useQuery } from 'react-query';
+    import axios from 'axios';
+    ```
 
-<Accordion title="TailwindCSS Styling" icon="palette">
-**TailwindCSS** is included and ready to use for styling. No additional CSS imports needed.
+??? note "TailwindCSS Styling"
+    **TailwindCSS** is included and ready to use for styling. No additional CSS imports needed.
 
-```jsx
-export const StyledComponent = () => {
-  return (
-    <div >
-      <h2 >Hello</h2>
-      <p >Styled with Tailwind</p>
-    </div>
-  );
-};
-```
+    ```jsx
+    export const StyledComponent = () => {
+      return (
+        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+          <h2 className="text-xl font-bold text-gray-800">Hello</h2>
+          <p className="mt-2 text-gray-600">Styled with Tailwind</p>
+        </div>
+      );
+    };
+    ```
 
-<Accordion title="Single Export Rule" icon="code">
-Each snippet file must have **exactly one** export or declared function. Multiple exports are not supported.
+??? note "Single Export Rule"
+    Each snippet file must have **exactly one** export or declared function. Multiple exports are not supported.
 
-```jsx
-// ✅ Good - Single export
-export const MyComponent = () => {
-  return <div>Content</div>;
-};
-```
+    ```jsx
+    // ✅ Good - Single export
+    export const MyComponent = () => {
+      return <div>Content</div>;
+    };
+    ```
 
-```jsx
-// ❌ Bad - Multiple exports
-export const ComponentA = () => <div>A</div>;
-export const ComponentB = () => <div>B</div>;
-```
-
-</AccordionGroup>
-
+    ```jsx
+    // ❌ Bad - Multiple exports
+    export const ComponentA = () => <div>A</div>;
+    export const ComponentB = () => <div>B</div>;
+    ```
 ### Example Snippet
 
 Here's a complete example showing the proper structure:
 
-<CodeGroup>
-```jsx snippets/ossm/example-snippet.jsx
+```jsx
 import { useState } from 'react';
 
 export const ExampleSnippet = () => {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <div >
-      <h3 >
+    <div className="p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl">
+      <h3 className="text-2xl font-bold text-gray-800 mb-4">
         Interactive Example
       </h3>
       <button
@@ -207,7 +192,7 @@ export const ExampleSnippet = () => {
         {isActive ? 'Active' : 'Inactive'}
       </button>
       {isActive && (
-        <p >
+        <p className="mt-4 text-gray-600">
           The component is now active!
         </p>
       )}
@@ -216,35 +201,21 @@ export const ExampleSnippet = () => {
 };
 ```
 
-```mdx Usage in documentation
+```mdx
 import ExampleSnippet from '/snippets/ossm/example-snippet.jsx';
 
 <ExampleSnippet />
 ```
-</CodeGroup>
-
 ## Development Tools
 
-<Card title="Cursor Rules Included" icon="wand-magic-sparkles">
-  This project includes Cursor AI rules to help you follow documentation best practices automatically while editing.
-</Card>
+- **Cursor Rules Included** — This project includes Cursor AI rules to help you follow documentation best practices automatically while editing.
 
 ## Next Steps
 
-<CardGroup cols={2}>
-<Card title="Mintlify Components" icon="puzzle-piece" href="https://www.mintlify.com/docs/components/accordions">
-  Explore available components for creating rich documentation
-</Card>
+- **[Mintlify Components](https://www.mintlify.com/docs/components/accordions)** — Explore available components for creating rich documentation
 
-<Card title="How to Contribute" icon="code-pull-request" href="/ossm/guides/contributing/how-to-become-a-contributor">
-  Learn the full contribution workflow for OSSM
-</Card>
+- **[How to Contribute](/ossm/guides/contributing/how-to-become-a-contributor)** — Learn the full contribution workflow for OSSM
 
-<Card title="BLE Protocol Docs" icon="file-code" href="/ossm/Software/communication/ble">
-  Example of well-structured technical documentation
-</Card>
+- **[BLE Protocol Docs](/ossm/communication/ble)** — Example of well-structured technical documentation
 
-<Card title="Forking Guide" icon="code-fork" href="/ossm/guides/contributing/forking">
-  Set up your own copy of the repository to work on
-</Card>
-</CardGroup>
+- **[Forking Guide](/ossm/guides/contributing/forking)** — Set up your own copy of the repository to work on

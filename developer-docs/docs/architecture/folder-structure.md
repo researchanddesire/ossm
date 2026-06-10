@@ -8,34 +8,27 @@ description: "Understanding the OSSM firmware source code organization"
 The OSSM firmware follows a modular, feature-based architecture. Each feature lives in its own namespace folder, making the codebase easier to navigate and maintain.
 
 !!! info
-Browse the source code on GitHub: [Software/src/](https://github.com/KinkyMakers/OSSM-hardware/tree/main/Software/src)
+    Browse the source code on GitHub: [Software/src/](https://github.com/KinkyMakers/OSSM-hardware/tree/main/Software/src)
 
 ## Overview
 
-<Tree>
-  <Tree.Folder name="Software" defaultOpen>
-    <Tree.Folder name="include">
-      <Tree.Folder name="boost">
-        <Tree.File name="sml.hpp" />
-      </Tree.Folder>
-    </Tree.Folder>
-    <Tree.Folder name="lib">
-      <Tree.Folder name="StrokeEngine" />
-    </Tree.Folder>
-    <Tree.Folder name="src" defaultOpen>
-      <Tree.File name="main.cpp" />
-      <Tree.Folder name="ossm" />
-      <Tree.Folder name="services" />
-      <Tree.Folder name="components" />
-      <Tree.Folder name="constants" />
-      <Tree.Folder name="structs" />
-      <Tree.Folder name="utils" />
-      <Tree.Folder name="extensions" />
-    </Tree.Folder>
-    <Tree.Folder name="test" />
-    <Tree.File name="platformio.ini" />
-  </Tree.Folder>
-</Tree>
+- **Software/**
+  - **include/**
+    - **boost/**
+      - sml.hpp
+  - **lib/**
+    - **StrokeEngine/**
+  - **src/**
+    - main.cpp
+    - **ossm/**
+    - **services/**
+    - **components/**
+    - **constants/**
+    - **structs/**
+    - **utils/**
+    - **extensions/**
+  - **test/**
+  - platformio.ini
 
 | Folder | Purpose |
 |--------|---------|
@@ -54,27 +47,24 @@ The firmware uses a **feature-based organization** where related code lives toge
 - **Stateless modules** - Feature functions operate on global state, making them easier to test and reason about
 
 !!! note
-The `OSSM` class in `ossm/OSSM.h` is retained for backward compatibility with BLE command handling. New features should use stateless namespace functions.
+    The `OSSM` class in `ossm/OSSM.h` is retained for backward compatibility with BLE command handling. New features should use stateless namespace functions.
 
 ## Core Application (`src/ossm/`)
 
 The `ossm/` folder contains the core application logic, organized by feature.
 
-<Tree>
-  <Tree.Folder name="ossm" defaultOpen>
-    <Tree.File name="Events.h" />
-    <Tree.File name="OSSM.h" />
-    <Tree.File name="OSSM.cpp" />
-    <Tree.Folder name="state" />
-    <Tree.Folder name="pages" />
-    <Tree.Folder name="homing" />
-    <Tree.Folder name="menu" />
-    <Tree.Folder name="simple_penetration" />
-    <Tree.Folder name="stroke_engine" />
-    <Tree.Folder name="pattern_controls" />
-    <Tree.Folder name="play_controls" />
-  </Tree.Folder>
-</Tree>
+- **ossm/**
+  - Events.h
+  - OSSM.h
+  - OSSM.cpp
+  - **state/**
+  - **pages/**
+  - **homing/**
+  - **menu/**
+  - **simple_penetration/**
+  - **stroke_engine/**
+  - **pattern_controls/**
+  - **play_controls/**
 
 | Folder | Purpose |
 |--------|---------|
@@ -111,7 +101,7 @@ The state machine components are separated for clarity and testability.
 | `error.h` | Error messages |
 
 !!! tip
-For details on how the state machine works, see [State Machine Architecture](/ossm/Software/architecture/state-machine).
+    For details on how the state machine works, see [State Machine Architecture](/ossm/architecture/state-machine).
 
 ### UI Pages (`ossm/pages/`)
 
@@ -153,36 +143,32 @@ Each operating mode is a self-contained module with its motion control logic.
 
 The `services/` folder provides hardware abstraction layers.
 
-<Tree>
-  <Tree.Folder name="services" defaultOpen>
-    <Tree.File name="stepper.h" />
-    <Tree.File name="stepper.cpp" />
-    <Tree.File name="display.h" />
-    <Tree.File name="display.cpp" />
-    <Tree.File name="encoder.h" />
-    <Tree.File name="encoder.cpp" />
-    <Tree.File name="led.h" />
-    <Tree.File name="led.cpp" />
-    <Tree.File name="board.h" />
-    <Tree.File name="board.cpp" />
-    <Tree.File name="tasks.h" />
-    <Tree.File name="tasks.cpp" />
-    <Tree.File name="wm.h" />
-    <Tree.File name="wm.cpp" />
-    <Tree.Folder name="communication" defaultOpen>
-      <Tree.File name="nimble.h" />
-      <Tree.File name="nimble.cpp" />
-      <Tree.File name="queue.h" />
-      <Tree.File name="queue.cpp" />
-      <Tree.File name="command.hpp" />
-      <Tree.File name="state.hpp" />
-      <Tree.File name="patterns.hpp" />
-      <Tree.File name="gpio.hpp" />
-      <Tree.File name="wifi.hpp" />
-      <Tree.File name="config.hpp" />
-    </Tree.Folder>
-  </Tree.Folder>
-</Tree>
+- **services/**
+  - stepper.h
+  - stepper.cpp
+  - display.h
+  - display.cpp
+  - encoder.h
+  - encoder.cpp
+  - led.h
+  - led.cpp
+  - board.h
+  - board.cpp
+  - tasks.h
+  - tasks.cpp
+  - wm.h
+  - wm.cpp
+  - **communication/**
+    - nimble.h
+    - nimble.cpp
+    - queue.h
+    - queue.cpp
+    - command.hpp
+    - state.hpp
+    - patterns.hpp
+    - gpio.hpp
+    - wifi.hpp
+    - config.hpp
 
 | File | Purpose |
 |------|---------|
@@ -196,27 +182,23 @@ The `services/` folder provides hardware abstraction layers.
 | `communication/` | BLE and WiFi communication |
 
 !!! info
-For BLE protocol details, see [BLE Communication](/ossm/Software/communication/ble).
+    For BLE protocol details, see [BLE Communication](/ossm/communication/ble).
 
 ## Constants (`src/constants/`)
 
 Configuration values and enums are centralized in the `constants/` folder.
 
-<Tree>
-  <Tree.Folder name="constants" defaultOpen>
-    <Tree.File name="Config.h" />
-    <Tree.File name="Pins.h" />
-    <Tree.File name="Menu.h" />
-    <Tree.File name="Version.h" />
-    <Tree.File name="UserConfig.h" />
-    <Tree.File name="Images.h" />
-    <Tree.File name="LogTags.h" />
-    <Tree.Folder name="copy">
-      <Tree.File name="en-us.h" />
-      <Tree.File name="fr.h" />
-    </Tree.Folder>
-  </Tree.Folder>
-</Tree>
+- **constants/**
+  - Config.h
+  - Pins.h
+  - Menu.h
+  - Version.h
+  - UserConfig.h
+  - Images.h
+  - LogTags.h
+  - **copy/**
+    - en-us.h
+    - fr.h
 
 | File | Purpose |
 |------|---------|
@@ -230,23 +212,20 @@ Configuration values and enums are centralized in the `constants/` folder.
 | `copy/` | Localized strings |
 
 !!! tip
-For configuration options, see [Configuration](/ossm/Software/getting-started/configuration).
+    For configuration options, see [Configuration](/ossm/getting-started/configuration).
 
 ## Utilities (`src/utils/`)
 
 Helper functions and classes used throughout the codebase.
 
-<Tree>
-  <Tree.Folder name="utils" defaultOpen>
-    <Tree.File name="StateLogger.h" />
-    <Tree.File name="RecursiveMutex.h" />
-    <Tree.File name="StrokeEngineHelper.h" />
-    <Tree.File name="format.h" />
-    <Tree.File name="analog.h" />
-    <Tree.File name="update.h" />
-    <Tree.File name="ble.h" />
-  </Tree.Folder>
-</Tree>
+- **utils/**
+  - StateLogger.h
+  - RecursiveMutex.h
+  - StrokeEngineHelper.h
+  - format.h
+  - analog.h
+  - update.h
+  - ble.h
 
 | File | Purpose |
 |------|---------|
@@ -262,13 +241,10 @@ Helper functions and classes used throughout the codebase.
 
 Shared data types used across modules.
 
-<Tree>
-  <Tree.Folder name="structs" defaultOpen>
-    <Tree.File name="SettingPercents.h" />
-    <Tree.File name="LanguageStruct.h" />
-    <Tree.File name="Points.h" />
-  </Tree.Folder>
-</Tree>
+- **structs/**
+  - SettingPercents.h
+  - LanguageStruct.h
+  - Points.h
 
 | File | Purpose |
 |------|---------|
@@ -299,20 +275,10 @@ The `platformio.ini` file defines build environments:
 
 ## Further Reading
 
-<CardGroup cols={2}>
-<Card title="State Machine" icon="diagram-project" href="/ossm/Software/architecture/state-machine">
-  Deep dive into the Boost.SML state machine architecture.
-</Card>
+- **[State Machine](/ossm/architecture/state-machine)** — Deep dive into the Boost.SML state machine architecture.
 
-<Card title="Configuration" icon="sliders" href="/ossm/Software/getting-started/configuration">
-  Customize motion parameters, pins, and settings.
-</Card>
+- **[Configuration](/ossm/getting-started/configuration)** — Customize motion parameters, pins, and settings.
 
-<Card title="Display Service" icon="display" href="/ossm/Software/getting-started/display">
-  Learn about the thread-safe display API.
-</Card>
+- **[Display Service](/ossm/getting-started/display)** — Learn about the thread-safe display API.
 
-<Card title="BLE Communication" icon="bluetooth" href="/ossm/Software/communication/ble">
-  Understand the Bluetooth protocol and characteristics.
-</Card>
-</CardGroup>
+- **[BLE Communication](/ossm/communication/ble)** — Understand the Bluetooth protocol and characteristics.

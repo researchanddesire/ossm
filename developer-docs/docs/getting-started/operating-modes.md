@@ -16,7 +16,7 @@ After homing completes, the OSSM displays the main menu on the remote's OLED scr
 | **Long-press encoder** | Return to menu (from any operating mode) |
 
 !!! info
-The menu wraps around—scrolling past the last item brings you back to the first.
+    The menu wraps around—scrolling past the last item brings you back to the first.
 
 ## Main menu options
 
@@ -45,23 +45,21 @@ Simple Penetration provides straightforward control with minimal parameters. It'
 
 ### Controls
 
-<Tabs>
-<Tab title="Speed">
+**Speed**
+
 The **left knob** (potentiometer) controls speed from 0% to 100%.
 
 - Turn clockwise to increase speed
 - Turn counterclockwise to decrease speed
 - Speed must be near zero to enter the mode (safety feature)
-</Tab>
 
-<Tab title="Stroke">
+**Stroke**
+
 The **right encoder** controls stroke length from 0% to 100%.
 
 - Turn clockwise to increase stroke length
 - Turn counterclockwise to decrease stroke length
 - Stroke determines how far the actuator travels on each cycle
-</Tab>
-</Tabs>
 
 ### Session statistics
 
@@ -76,11 +74,11 @@ Simple Penetration tracks three statistics during your session:
 These statistics display at the bottom of the screen and reset when you return to the menu.
 
 !!! tip
-Simple Penetration is best for straightforward use cases where you want consistent, predictable motion without pattern variations.
+    Simple Penetration is best for straightforward use cases where you want consistent, predictable motion without pattern variations.
 
 ## Stroke Engine mode
 
-Stroke Engine provides advanced pattern-based control with four adjustable parameters. It uses the [StrokeEngine library](/ossm/Software/motion/stroke-engine/introduction) to generate varied motion patterns.
+Stroke Engine provides advanced pattern-based control with four adjustable parameters. It uses the [StrokeEngine library](/ossm/motion/stroke-engine/introduction) to generate varied motion patterns.
 
 ### Default settings
 
@@ -92,37 +90,35 @@ Stroke Engine provides advanced pattern-based control with four adjustable param
 | Sensation | 50% |
 
 !!! note
-Stroke Engine starts with different defaults than Simple Penetration—notably a lower depth (10%) and higher stroke (50%)—to provide a gentler initial experience with pattern-based motion.
+    Stroke Engine starts with different defaults than Simple Penetration—notably a lower depth (10%) and higher stroke (50%)—to provide a gentler initial experience with pattern-based motion.
 
 ### Controls
 
-<Tabs>
-<Tab title="Speed">
+**Speed**
+
 The **left knob** (potentiometer) controls speed from 0% to 100%.
 
 Speed affects how fast the patterns execute, measured in cycles per minute.
-</Tab>
 
-<Tab title="Parameters">
+**Parameters**
+
 The **right encoder** controls three parameters. Press the encoder to cycle between them:
 
 | Parameter | Description |
 |-----------|-------------|
 | **Depth** | How far into the body the actuator travels at its deepest point |
 | **Stroke** | The distance the actuator retracts from the deepest point |
-| **Sensation** | A pattern-specific modifier that changes behavior (see [Patterns](/ossm/Software/motion/stroke-engine/Pattern)) |
+| **Sensation** | A pattern-specific modifier that changes behavior (see [Patterns](/ossm/motion/stroke-engine/Pattern)) |
 
 The currently selected parameter displays with a full-width bar; inactive parameters show as smaller indicators.
-</Tab>
 
-<Tab title="Pattern selection">
+**Pattern selection**
+
 **Double-press** the right encoder to open pattern selection.
 
 Use the encoder to scroll through available patterns, then press to select. The pattern changes immediately.
 
 Press the encoder or double-press again to return to parameter controls.
-</Tab>
-</Tabs>
 
 ### Available patterns
 
@@ -139,12 +135,12 @@ Stroke Engine provides 7 motion patterns:
 | 6 | Insist | Modifies stroke length while maintaining speed |
 
 !!! info
-For detailed pattern descriptions and sensation effects, see the [Pattern documentation](/ossm/Software/motion/stroke-engine/Pattern).
+    For detailed pattern descriptions and sensation effects, see the [Pattern documentation](/ossm/motion/stroke-engine/Pattern).
 
 ## Streaming mode (experimental)
 
 !!! warning
-Streaming mode is experimental and not recommended for general play. The protocol and behavior may change in future firmware updates. Only use streaming with trusted applications from known sources.
+    Streaming mode is experimental and not recommended for general play. The protocol and behavior may change in future firmware updates. Only use streaming with trusted applications from known sources.
 
 Streaming mode allows external applications to send real-time position commands to the OSSM via BLE. Unlike Simple Penetration and Stroke Engine which generate motion patterns internally, Streaming mode receives exact position targets from an external source—enabling synchronized playback with video content, funscripts, or custom control applications.
 
@@ -160,7 +156,7 @@ Streaming mode allows external applications to send real-time position commands 
 sequenceDiagram
     participant App as External App
     participant OSSM as OSSM
-    
+
     App->>OSSM: go:streaming
     OSSM->>OSSM: Home to position 0
     loop Playback
@@ -179,7 +175,7 @@ sequenceDiagram
 ### Safety considerations
 
 !!! warning
-Streaming mode accepts commands from external sources. Only use applications you trust, and always test at low intensity before full engagement. Keep your physical stop controls accessible.
+    Streaming mode accepts commands from external sources. Only use applications you trust, and always test at low intensity before full engagement. Keep your physical stop controls accessible.
 
 - The OSSM validates incoming commands but relies on the external application for safe motion planning
 - If the BLE connection is lost, the OSSM ramps down speed over 2 seconds and stops
@@ -201,39 +197,22 @@ While in Streaming mode:
 | Time unit | Milliseconds |
 | Minimum firmware | Version 3.0+ |
 
-<CardGroup cols={2}>
-<Card title="Funscript Player" icon="play" href="/ossm/tools/funscript-player">
-  Play funscript files synchronized with video.
-</Card>
+- **[Funscript Player](/ossm/tools/funscript-player)** — Play funscript files synchronized with video.
 
-<Card title="BLE Protocol" icon="bluetooth" href="/ossm/Software/communication/ble">
-  Full streaming command reference and protocol details.
-</Card>
-</CardGroup>
-
+- **[BLE Protocol](/ossm/communication/ble)** — Full streaming command reference and protocol details.
 ## Exiting any mode
 
 From any operating mode, **long-press the encoder for approximately 3 seconds** to trigger an emergency stop and return to the main menu.
 
 !!! warning
-Emergency stop immediately halts motion and marks the device as "not homed." You may need to restart and re-home before operating again.
+    Emergency stop immediately halts motion and marks the device as "not homed." You may need to restart and re-home before operating again.
 
 ## Related pages
 
-<CardGroup cols={2}>
-<Card title="Safety Features" icon="shield" href="/ossm/Software/getting-started/safety-features">
-  Learn about preflight checks, disconnect safety, and emergency stop.
-</Card>
+- **[Safety Features](/ossm/getting-started/safety-features)** — Learn about preflight checks, disconnect safety, and emergency stop.
 
-<Card title="StrokeEngine Patterns" icon="wave-pulse" href="/ossm/Software/motion/stroke-engine/Pattern">
-  Detailed descriptions of each motion pattern and sensation effects.
-</Card>
+- **[StrokeEngine Patterns](/ossm/motion/stroke-engine/Pattern)** — Detailed descriptions of each motion pattern and sensation effects.
 
-<Card title="Funscript Player" icon="play" href="/ossm/tools/funscript-player">
-  Play funscript files synchronized with video using streaming mode.
-</Card>
+- **[Funscript Player](/ossm/tools/funscript-player)** — Play funscript files synchronized with video using streaming mode.
 
-<Card title="BLE Protocol" icon="bluetooth" href="/ossm/Software/communication/ble">
-  Technical reference for BLE commands including streaming.
-</Card>
-</CardGroup>
+- **[BLE Protocol](/ossm/communication/ble)** — Technical reference for BLE commands including streaming.

@@ -5,29 +5,20 @@ description: "Create versatile stroking motions with stepper or servo motors on 
 
 StrokeEngine is a library for creating a variety of stroking motions with stepper or servo motors on an ESP32. You can use it with any DIY machine featuring a linear position drive powered by a stepper or servo motor.
 
-<CardGroup cols={2}>
-  <Card title="FuckIO Example" icon="code" href="https://github.com/theelims/FuckIO">
-    Reference implementation using StrokeEngine
-  </Card>
-  <Card title="OSSM Project" icon="gear" href="https://github.com/KinkyMakers/OSSM-hardware">
-    Popular open-source implementation by Kinky Makers
-  </Card>
-</CardGroup>
-
+- **[FuckIO Example](https://github.com/theelims/FuckIO)** — Reference implementation using StrokeEngine
+  - **[OSSM Project](https://github.com/KinkyMakers/OSSM-hardware)** — Popular open-source implementation by Kinky Makers
 ## Core concepts
 
 StrokeEngine takes full advantage of servo and stepper driven machines over fixed cam-driven designs. Under the hood, it uses the [FastAccelStepper](https://github.com/gin66/FastAccelStepper) library to interface with motors using standard STEP/DIR signals.
 
 !!! tip
-Understanding these concepts helps you get up and running with StrokeEngine faster.
+    Understanding these concepts helps you get up and running with StrokeEngine faster.
 
 ### Coordinate system
 
 The machine uses an internal coordinate system that converts real-world metric units into encoder/stepper steps. This abstraction works with all machine sizes regardless of the motor you choose.
 
-<Frame caption="StrokeEngine coordinate system showing physical travel, keepout boundaries, and stroke parameters">
-  <img src="./ossm/_images/coordinates.svg" alt="Coordinate system diagram showing the relationship between physicalTravel, keepoutBoundary, depth, and stroke parameters" />
-</Frame>
+<img src="./_images/coordinates.svg" alt="Coordinate system diagram showing the relationship between physicalTravel, keepoutBoundary, depth, and stroke parameters" />
 
 **Key coordinate concepts:**
 
@@ -42,7 +33,7 @@ The machine uses an internal coordinate system that converts real-world metric u
 | **Stroke** | The working distance of a stroking motion (adjustable at runtime) |
 
 !!! note
-Think of **Stroke** as the amplitude and **Depth** as a linear offset added to it. The positive move direction is towards the front (towards the body).
+    Think of **Stroke** as the amplitude and **Depth** as a linear offset added to it. The positive move direction is towards the front (towards the body).
 
 ### Patterns
 
@@ -55,7 +46,7 @@ Each pattern accepts four parameters:
 - **sensation** — Arbitrary modifier for pattern behavior (-100 to 100)
 
 !!! info
-See the [Pattern documentation](/ossm/Software/motion/stroke-engine/Pattern) for detailed descriptions of available patterns and instructions for creating your own.
+    See the [Pattern documentation](/ossm/motion/stroke-engine/Pattern) for detailed descriptions of available patterns and instructions for creating your own.
 
 ### Graceful error handling
 
@@ -103,13 +94,11 @@ StrokeEngine provides a simple yet powerful API. Specify all input parameters in
 
 ### Initialize the library
 
-
 ### Step 1: Define pin configurations
-
 
     Set up the pins for your motor driver and optional homing switch:
 
-```cpp main.cpp
+```cpp
 #include <StrokeEngine.h>
 
 // Pin Definitions
@@ -118,13 +107,12 @@ StrokeEngine provides a simple yet powerful API. Specify all input parameters in
 #define SERVO_ENABLE      17
 #define SERVO_ENDSTOP     25        // Optional: Only needed with a homing switch
 ```
-  
-### Step 2: Configure motor properties
 
+### Step 2: Configure motor properties
 
     Calculate steps per millimeter based on your hardware:
 
-```cpp main.cpp
+```cpp
 // Calculation Aid:
 #define STEP_PER_REV      2000      // Steps per revolution (check driver DIP switches)
 #define PULLEY_TEETH      20        // Teeth on the drive pulley
@@ -144,25 +132,23 @@ static motorProperties servoMotor {
   .enablePin = SERVO_ENABLE           // Enable signal pin
 };
 ```
-  
-### Step 3: Define machine geometry
 
+### Step 3: Define machine geometry
 
     Specify the physical dimensions of your machine:
 
-```cpp main.cpp
+```cpp
 static machineGeometry strokingMachine = {
   .physicalTravel = 160.0,            // Total travel between hard endstops (mm)
   .keepoutBoundary = 5.0              // Safety margin on each side (mm)
 };
 ```
-  
-### Step 4: Configure homing
 
+### Step 4: Configure homing
 
     Set up the endstop switch properties:
 
-```cpp main.cpp
+```cpp
 static endstopProperties endstop = {
   .homeToBack = true,                 // Endstop at rear of machine
   .activeLow = true,                  // Switch wired active low
@@ -172,20 +158,19 @@ static endstopProperties endstop = {
 
 StrokeEngine Stroker;
 ```
-  
-### Step 5: Initialize in setup()
 
+### Step 5: Initialize in setup()
 
     Call the initialization functions and wait for homing to complete:
 
-```cpp main.cpp
+```cpp
 void setup() {
   // Initialize StrokeEngine
   Stroker.begin(&strokingMachine, &servoMotor);
   Stroker.enableAndHome(&endstop);
-  
+
   // Your other initialization code here
-  
+
   // Wait for homing to complete
   while (Stroker.getState() != READY) {
     delay(100);
@@ -194,13 +179,12 @@ void setup() {
 ```
 
 !!! success
-When `getState()` returns `READY`, the machine is homed and ready for motion commands.
-
+    When `getState()` returns `READY`, the machine is homed and ready for motion commands.
 
 ### Manual homing (no endstop switch)
 
 !!! warning
-Manual homing is dangerous. Calling `thisIsHome()` when not at the physical endstop causes an incorrect coordinate system, resulting in a crash that could damage your machine.
+    Manual homing is dangerous. Calling `thisIsHome()` when not at the physical endstop causes an incorrect coordinate system, resulting in a crash that could damage your machine.
 
 If your machine lacks a homing switch, you can use manual homing:
 
@@ -217,7 +201,7 @@ This enables the driver, sets the current position as `-keepoutBoundary`, and sl
 
 Use `getNumberOfPattern()` and `getPatternName()` to enumerate available patterns:
 
-```cpp patterns.cpp
+```cpp
 String getPatternJSON() {
     String JSON = "[{\"";
     for (size_t i = 0; i < Stroker.getNumberOfPattern(); i++) {
@@ -255,7 +239,7 @@ Stroker.moveToMax(10.0);    // Move at 10 mm/s (default speed)
 ```
 
 !!! note
-These functions can be called from `PATTERN` or `READY` states and stop any current motion. They return `false` if called in an invalid state.
+    These functions can be called from `PATTERN` or `READY` states and stop any current motion. They return `false` if called in an invalid state.
 
 ### Interactive depth setup
 
@@ -269,10 +253,10 @@ Stroker.setupDepth(10.0);       // Specify speed
 Update the depth position with `Stroker.setDepth(float)` and read the current value with `Stroker.getDepth()`.
 
 !!! tip
-**Fancy Mode:** Call `Stroker.setupDepth(10.0, true)` to adjust both depth and stroke interactively. The sensation slider maps to the interval `[depth-stroke, depth]`:
-- `sensation = 100` — Adjusts depth position
-- `sensation = -100` — Adjusts stroke position  
-- `sensation = 0` — Positions at stroke midpoint
+    **Fancy Mode:** Call `Stroker.setupDepth(10.0, true)` to adjust both depth and stroke interactively. The sensation slider maps to the interval `[depth-stroke, depth]`:
+    - `sensation = 100` — Adjusts depth position
+    - `sensation = -100` — Adjusts stroke position  
+    - `sensation = 0` — Positions at stroke midpoint
 
 ### Parameter functions
 
@@ -288,7 +272,7 @@ Stroker.setPattern(int index, bool applyNow);      // 0 to getNumberOfPattern()-
 ```
 
 !!! info
-Set `applyNow` to `true` to apply changes immediately mid-stroke. Otherwise, changes take effect after the current stroke completes.
+    Set `applyNow` to `true` to apply changes immediately mid-stroke. Otherwise, changes take effect after the current stroke completes.
 
 Read back the constrained values actually used by StrokeEngine:
 
@@ -316,4 +300,4 @@ Stroker.registerTelemetryCallback(callbackTelemetry);
 ```
 
 !!! note
-Consult [StrokeEngine.h](https://github.com/theelims/StrokeEngine/blob/main/src/StrokeEngine.h) in the source repository for the complete API reference, including overloaded functions and additional features.
+    Consult [StrokeEngine.h](https://github.com/theelims/StrokeEngine/blob/main/src/StrokeEngine.h) in the source repository for the complete API reference, including overloaded functions and additional features.

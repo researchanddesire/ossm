@@ -1,0 +1,10 @@
+title: Getting Started
+nav:
+  - introduction.md
+  - PlatformIO.md
+  - configuration.md
+  - operating-modes.md
+  - safety-features.md
+  - LED_Status.md
+  - hardware-tests.md
+  - wifi-and-updates.md

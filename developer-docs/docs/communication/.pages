@@ -1,0 +1,4 @@
+title: Communication
+nav:
+  - ble.md
+  - gpio.md

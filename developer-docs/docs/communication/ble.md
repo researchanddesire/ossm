@@ -6,7 +6,7 @@ description: "Control your OSSM wirelessly using Bluetooth Low Energy (BLE) from
 The OSSM uses Bluetooth Low Energy (BLE) for wireless control and monitoring. You can build client applications that connect to the OSSM to send commands and receive real-time state updates.
 
 !!! info
-BLE provides low-latency wireless control with automatic reconnection and state synchronization.
+    BLE provides low-latency wireless control with automatic reconnection and state synchronization.
 
 ## Before you begin
 
@@ -72,7 +72,7 @@ go:<state>
 | `fail:<original_command>` | Command failed (check format or current state) |
 
 !!! tip
-Always wait for the response before sending another command. Commands are processed sequentially.
+    Always wait for the response before sending another command. Commands are processed sequentially.
 
 #### Speed knob configuration characteristic
 
@@ -89,25 +89,22 @@ Always wait for the response before sending another command. Commands are proces
 | `true`, `1`, `t` | Speed knob acts as upper limit (default) |
 | `false`, `0`, `f` | Speed knob and BLE speed are independent |
 
-<Tabs>
-<Tab title="Knob as limit (default)">
+**Knob as limit (default)**
+
 When set to `true`, BLE speed commands (0-100) are treated as a percentage of the current physical knob position.
 
 **Example**: Knob at 50%, BLE command `set:speed:80` → Effective speed = 40%
 
 This mode provides a hardware safety limit that users can control physically.
-</Tab>
 
-<Tab title="Independent mode">
+**Independent mode**
+
 When set to `false`, BLE speed commands (0-100) are used directly as the speed value, ignoring the knob position.
 
 **Example**: BLE command `set:speed:80` → Effective speed = 80%
 
 !!! warning
-In independent mode, BLE commands can override the physical knob. Ensure your application implements appropriate safety controls.
-
-</Tab>
-</Tabs>
+    In independent mode, BLE commands can override the physical knob. Ensure your application implements appropriate safety controls.
 
 **Response format**
 
@@ -115,7 +112,6 @@ In independent mode, BLE commands can override the physical knob. Ensure your ap
 | -------- | ------- |
 | `true` or `false` | Current configuration value |
 | `error:invalid_value` | Invalid input provided |
-
 
 #### Latency compensation configuration characteristic
 
@@ -132,8 +128,8 @@ In independent mode, BLE commands can override the physical knob. Ensure your ap
 | `true`, `1`, `t` | Latency compensation is active |
 | `false`, `0`, `f` | Latency compensation is inactive (default) |
 
-<Tabs>
-<Tab title="Enabled">
+**Enabled**
+
 When set to `true`, the OSSM expects to receive the exact commands and times from the funscript and that the commands are sent
 with the same delay between commands as the time value. By calculating the time between received commands and the time variable
 the OSSM is able to determine the latency introduced by BLE and correct for it with slight changes to the speed of the motion.
@@ -142,14 +138,11 @@ add delay to all movements. This gives the OSSM time to receive the next command
 the removal of any delay introduced by late commands, as well as smoothing motion by combining movements travelling in the same direction.
 Funscript players should add this buffer value to their playback offset and include an additional setting for fine tuning playback offset
 to account for transmission time and any delay inherent to the funscript itself.
-</Tab>
 
-<Tab title="Disabled">
+**Disabled**
+
 When set to `false`, the OSSM will execute commands as they are received. Commands that arrive late will be executed late. Commands
 that arrive early will be executed when the prior command has finished.
-
-</Tab>
-</Tabs>
 
 **Response format**
 
@@ -200,10 +193,10 @@ When not connected, the `ssid` field will contain the last saved SSID (if any), 
 | `fail:wifi:save_failed` | Failed to save credentials to NVS |
 
 !!! tip
-WiFi credentials are persisted to non-volatile storage (NVS) and will be retained across device reboots. The device will attempt to auto-connect using saved credentials on startup.
+    WiFi credentials are persisted to non-volatile storage (NVS) and will be retained across device reboots. The device will attempt to auto-connect using saved credentials on startup.
 
 !!! warning
-WiFi credentials are transmitted in plain text over BLE. Ensure you trust the connection and are in a secure environment when configuring WiFi settings.
+    WiFi credentials are transmitted in plain text over BLE. Ensure you trust the connection and are in a secure environment when configuring WiFi settings.
 
 **Example usage**
 
@@ -251,42 +244,37 @@ Subscribe to these characteristics to monitor the OSSM's current state.
 }
 ```
 
-<AccordionGroup>
 ??? note "Available states"
+    | State | Description |
+    | ----- | ----------- |
+    | `idle` | Initializing |
+    | `homing` | Homing sequence active |
+    | `homing.forward` | Forward homing in progress |
+    | `homing.backward` | Backward homing in progress |
+    | `menu` | Main menu displayed |
+    | `menu.idle` | Menu idle state |
+    | `simplePenetration` | Simple penetration mode |
+    | `simplePenetration.idle` | Simple penetration idle |
+    | `simplePenetration.preflight` | Pre-flight checks |
+    | `strokeEngine` | Stroke engine mode |
+    | `strokeEngine.idle` | Stroke engine idle |
+    | `strokeEngine.preflight` | Pre-flight checks |
+    | `strokeEngine.pattern` | Pattern selection |
+    | `streaming` | Streaming mode (experimental) |
+    | `update` | Update mode |
+    | `update.checking` | Checking for updates |
+    | `update.updating` | Update in progress |
+    | `update.idle` | Update idle |
+    | `wifi` | WiFi setup mode |
+    | `wifi.idle` | WiFi setup idle |
+    | `help` | Help screen |
+    | `help.idle` | Help idle |
+    | `error` | Error state |
+    | `error.idle` | Error idle |
+    | `error.help` | Error help |
+    | `restart` | Restart state |
 
-| State | Description |
-| ----- | ----------- |
-| `idle` | Initializing |
-| `homing` | Homing sequence active |
-| `homing.forward` | Forward homing in progress |
-| `homing.backward` | Backward homing in progress |
-| `menu` | Main menu displayed |
-| `menu.idle` | Menu idle state |
-| `simplePenetration` | Simple penetration mode |
-| `simplePenetration.idle` | Simple penetration idle |
-| `simplePenetration.preflight` | Pre-flight checks |
-| `strokeEngine` | Stroke engine mode |
-| `strokeEngine.idle` | Stroke engine idle |
-| `strokeEngine.preflight` | Pre-flight checks |
-| `strokeEngine.pattern` | Pattern selection |
-| `streaming` | Streaming mode (experimental) |
-| `update` | Update mode |
-| `update.checking` | Checking for updates |
-| `update.updating` | Update in progress |
-| `update.idle` | Update idle |
-| `wifi` | WiFi setup mode |
-| `wifi.idle` | WiFi setup idle |
-| `help` | Help screen |
-| `help.idle` | Help idle |
-| `error` | Error state |
-| `error.idle` | Error idle |
-| `error.help` | Error help |
-| `restart` | Restart state |
-
-For the complete state machine implementation, see [OSSM.h](https://github.com/KinkyMakers/OSSM-hardware/blob/main/Software/src/ossm/OSSM.h) in the source repository.
-
-</AccordionGroup>
-
+    For the complete state machine implementation, see [OSSM.h](https://github.com/KinkyMakers/OSSM-hardware/blob/main/Software/src/ossm/OSSM.h) in the source repository.
 **Notification behavior**
 
 - State changes trigger immediate notifications
@@ -327,14 +315,11 @@ For the complete state machine implementation, see [OSSM.h](https://github.com/K
 
 To retrieve a pattern description:
 
-
 ### Step 1: Write the pattern index
-
 
 Write the index number (0-6) to the characteristic.
 
 ### Step 2: Read the description
-
 
 Read the characteristic to receive the pattern description string.
 
@@ -353,7 +338,7 @@ Read the characteristic to receive the pattern description string.
 ### Streaming commands (experimental)
 
 !!! warning
-Position streaming is experimental and not recommended for general use. The protocol and behavior may change in future firmware updates.
+    Position streaming is experimental and not recommended for general use. The protocol and behavior may change in future firmware updates.
 
 When in streaming mode (`go:streaming`), the OSSM accepts real-time position commands that enable synchronized playback with external content such as funscripts.
 
@@ -382,7 +367,7 @@ stream:50:300     # Move to 50% (mid-stroke) in 300ms
 5. Motion uses maximum acceleration for responsive feel
 
 !!! note
-Position 0 represents fully retracted (home), and position 100 represents fully extended. The time parameter indicates how long the motion should take, allowing the OSSM to calculate appropriate speed for smooth playback.
+    Position 0 represents fully retracted (home), and position 100 represents fully extended. The time parameter indicates how long the motion should take, allowing the OSSM to calculate appropriate speed for smooth playback.
 
 **Requirements**
 
@@ -391,7 +376,7 @@ Position 0 represents fully retracted (home), and position 100 represents fully 
 - Commands sent via the primary command characteristic
 
 !!! tip
-For funscript playback, see the [Funscript Player](/ossm/tools/funscript-player) tool which handles timing and command generation automatically.
+    For funscript playback, see the [Funscript Player](/ossm/tools/funscript-player) tool which handles timing and command generation automatically.
 
 ### GPIO characteristics
 
@@ -423,12 +408,12 @@ Write commands in the format `<pin>:<state>` where pin is 1-4 and state is `high
 | `error:pin_out_of_range` | Pin number not 1-4 |
 
 !!! info
-For detailed GPIO documentation including hardware integration examples, see [GPIO Control](/ossm/Software/communication/gpio).
+    For detailed GPIO documentation including hardware integration examples, see [GPIO Control](/ossm/communication/gpio).
 
 ## Fleshy Thrust Sync emulation (testing only)
 
 !!! warning
-This feature is for development testing only and is **not recommended for use**. It requires a special firmware build and may be removed in future versions.
+    This feature is for development testing only and is **not recommended for use**. It requires a special firmware build and may be removed in future versions.
 
 The OSSM firmware can optionally emulate the Fleshy Thrust Sync (FTS) BLE protocol for compatibility testing with applications like faptap.net. This feature is disabled by default and requires compiling firmware with the `PRETEND_TO_BE_FLESHY_THRUST_SYNC` flag.
 
@@ -465,7 +450,7 @@ Byte 2: 0xFA (250 & 0xFF = 250)
 ```
 
 !!! note
-The FTS emulation uses the same underlying streaming mechanism as the native `stream:pos:time` command. The OSSM must be in streaming mode for commands to take effect.
+    The FTS emulation uses the same underlying streaming mechanism as the native `stream:pos:time` command. The OSSM must be in streaming mode for commands to take effect.
 
 ### Why not recommended
 
@@ -509,34 +494,32 @@ The OSSM uses a structured UUID namespace for organized expansion.
 
 ### Current characteristic assignments
 
-<Tabs>
-<Tab title="Commands (0x1xxx)">
+**Commands (0x1xxx)**
+
 ```
 522b443a-4f53-534d-1000-420badbabe69  # Primary command
 522b443a-4f53-534d-1010-420badbabe69  # Speed knob configuration
 522b443a-4f53-534d-1020-420badbabe69  # WiFi configuration
 ```
-</Tab>
 
-<Tab title="State (0x2xxx)">
+**State (0x2xxx)**
+
 ```
 522b443a-4f53-534d-2000-420badbabe69  # Current state
 ```
-</Tab>
 
-<Tab title="Patterns (0x3xxx)">
+**Patterns (0x3xxx)**
+
 ```
 522b443a-4f53-534d-3000-420badbabe69  # Pattern list
 522b443a-4f53-534d-3010-420badbabe69  # Pattern description
 ```
-</Tab>
 
-<Tab title="GPIO (0x4xxx)">
+**GPIO (0x4xxx)**
+
 ```
 522b443a-4f53-534d-4000-420badbabe69  # GPIO control
 ```
-</Tab>
-</Tabs>
 
 ## Connection management
 
@@ -558,7 +541,7 @@ The OSSM uses a structured UUID namespace for organized expansion.
 | Bonding | Disabled (no persistent pairing) |
 
 !!! note
-The OSSM uses "Just Works" pairing for ease of use. Anyone within BLE range can connect when the device is advertising.
+    The OSSM uses "Just Works" pairing for ease of use. Anyone within BLE range can connect when the device is advertising.
 
 ### Disconnection safety
 
@@ -572,7 +555,7 @@ When a BLE connection is lost unexpectedly, the OSSM automatically ramps down sp
 4. Device continues at zero speed until reconnected or manually stopped
 
 !!! info
-The ease-in-out-sine curve provides smooth deceleration that feels natural and reduces mechanical stress. If speed was already zero at disconnect, no ramp occurs.
+    The ease-in-out-sine curve provides smooth deceleration that feels natural and reduces mechanical stress. If speed was already zero at disconnect, no ramp occurs.
 
 **Client considerations:**
 
@@ -587,67 +570,50 @@ The ease-in-out-sine curve provides smooth deceleration that feels natural and r
 
 Follow these steps to establish a connection and begin controlling your OSSM:
 
-
 ### Step 3: Scan for the device
-
 
 Scan for BLE devices with the name "OSSM".
 
 !!! success
-Device appears in scan results.
-
+    Device appears in scan results.
 
 ### Step 4: Connect to the device
-
 
 Initiate a GATT connection to the OSSM.
 
 ### Step 5: Discover services
 
-
 Discover all services and characteristics on the device.
 
 !!! success
-Primary service UUID `522b443a-4f53-534d-0001-420badbabe69` is found.
-
+    Primary service UUID `522b443a-4f53-534d-0001-420badbabe69` is found.
 
 ### Step 6: Subscribe to state notifications
-
 
 Enable notifications on the state characteristic to receive real-time updates.
 
 ### Step 7: Read initial state
 
-
 Read the current state and pattern list to initialize your application.
 
 ### Step 8: Send commands
-
 
 Begin sending commands to control the OSSM.
 
 ### Best practices
 
-<CardGroup cols={2}>
-<Card title="Command handling" icon="terminal">
-- Validate command format before sending
+- **Command handling** — - Validate command format before sending
 - Handle both `ok:` and `fail:` responses
 - Implement retry logic for critical commands
 - Monitor state changes to confirm command execution
-</Card>
 
-<Card title="State monitoring" icon="eye">
-- Subscribe to state characteristic notifications
+- **State monitoring** — - Subscribe to state characteristic notifications
 - Parse JSON state updates reliably
 - Handle state transitions appropriately
 - Implement timeout handling for missing updates
-</Card>
-</CardGroup>
-
 ## Example code
 
-<CodeGroup>
-```javascript Web Bluetooth (JavaScript)
+```javascript
 // Connect to OSSM
 const device = await navigator.bluetooth.requestDevice({
   filters: [{ name: "OSSM" }],
@@ -703,7 +669,7 @@ const patternList = JSON.parse(new TextDecoder().decode(patterns));
 console.log("Available patterns:", patternList);
 ```
 
-```python Python (bleak)
+```python
 import asyncio
 import json
 from bleak import BleakClient
@@ -749,53 +715,43 @@ async def connect_to_ossm():
 
 asyncio.run(connect_to_ossm())
 ```
-</CodeGroup>
-
 ## Troubleshooting
 
-<AccordionGroup>
 ??? note "Connection fails"
+    **Symptoms**: Unable to discover or connect to the OSSM.
 
-**Symptoms**: Unable to discover or connect to the OSSM.
-
-**Solutions**:
-- Ensure the OSSM is powered on and within range (~10 meters)
-- Check that no other device is currently connected to the OSSM
-- Restart the OSSM to reset the BLE stack
-- Try moving closer to the device
+    **Solutions**:
+    - Ensure the OSSM is powered on and within range (~10 meters)
+    - Check that no other device is currently connected to the OSSM
+    - Restart the OSSM to reset the BLE stack
+    - Try moving closer to the device
 
 ??? note "Commands not working"
+    **Symptoms**: Commands return `fail:` or have no effect.
 
-**Symptoms**: Commands return `fail:` or have no effect.
-
-**Solutions**:
-- Verify the command format matches the specification exactly
-- Check that the OSSM is in a state that accepts commands (e.g., `strokeEngine` or `simplePenetration`)
-- Use `go:strokeEngine` or `go:simplePenetration` first if in menu state
-- Read the current state to understand which commands are valid
+    **Solutions**:
+    - Verify the command format matches the specification exactly
+    - Check that the OSSM is in a state that accepts commands (e.g., `strokeEngine` or `simplePenetration`)
+    - Use `go:strokeEngine` or `go:simplePenetration` first if in menu state
+    - Read the current state to understand which commands are valid
 
 ??? note "No state updates"
+    **Symptoms**: State characteristic never updates after subscribing.
 
-**Symptoms**: State characteristic never updates after subscribing.
-
-**Solutions**:
-- Verify notification subscription was successful
-- Check that your BLE library supports notifications
-- Ensure you're reading notifications from the correct characteristic UUID
-- Try disconnecting and reconnecting
+    **Solutions**:
+    - Verify notification subscription was successful
+    - Check that your BLE library supports notifications
+    - Ensure you're reading notifications from the correct characteristic UUID
+    - Try disconnecting and reconnecting
 
 ??? note "Invalid responses"
+    **Symptoms**: Receiving unexpected or malformed data.
 
-**Symptoms**: Receiving unexpected or malformed data.
-
-**Solutions**:
-- Ensure you're decoding responses as UTF-8 text
-- Verify JSON parsing handles the state format correctly
-- Check for encoding issues in your BLE library
-
-</AccordionGroup>
-
+    **Solutions**:
+    - Ensure you're decoding responses as UTF-8 text
+    - Verify JSON parsing handles the state format correctly
+    - Check for encoding issues in your BLE library
 ### Debug information
 
 !!! tip
-Enable ESP32 logging at DEBUG level for detailed protocol information. Monitor BLE connection status, MTU changes, and state machine transitions.
+    Enable ESP32 logging at DEBUG level for detailed protocol information. Monitor BLE connection status, MTU changes, and state machine transitions.

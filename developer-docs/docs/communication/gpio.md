@@ -6,7 +6,7 @@ description: "Control GPIO output pins on your OSSM via Bluetooth Low Energy for
 The OSSM exposes four GPIO pins that can be controlled via Bluetooth Low Energy (BLE). Use these pins to trigger external accessories, indicators, relays, or other hardware integrations.
 
 !!! info
-GPIO control is a developer/maker feature. It requires a BLE client application to send commands—there's no on-device interface for GPIO control.
+    GPIO control is a developer/maker feature. It requires a BLE client application to send commands—there's no on-device interface for GPIO control.
 
 ## Overview
 
@@ -32,7 +32,7 @@ The GPIO characteristic allows you to:
 | Namespace | 0x4 (GPIO) |
 
 !!! note
-The GPIO characteristic is part of the main OSSM BLE service (`522b443a-4f53-534d-0001-420badbabe69`). Connect to the service first, then access this characteristic.
+    The GPIO characteristic is part of the main OSSM BLE service (`522b443a-4f53-534d-0001-420badbabe69`). Connect to the service first, then access this characteristic.
 
 ## Pin mapping
 
@@ -46,7 +46,7 @@ The firmware exposes 4 logical pins that map to ESP32 GPIO numbers:
 | 4 | GPIO 33 | Available on header |
 
 !!! warning
-These GPIO pins are directly connected to the ESP32. They output 3.3V logic levels with limited current capacity (~12mA per pin). Use appropriate drivers for high-current loads.
+    These GPIO pins are directly connected to the ESP32. They output 3.3V logic levels with limited current capacity (~12mA per pin). Use appropriate drivers for high-current loads.
 
 ## Command format
 
@@ -94,8 +94,7 @@ This indicates which logical pins are available for control.
 
 ## Example code
 
-<CodeGroup>
-```javascript Web Bluetooth (JavaScript)
+```javascript
 // Connect to OSSM (assumes already connected to service)
 const gpioChar = await service.getCharacteristic(
   "522b443a-4f53-534d-4000-420badbabe69"
@@ -118,7 +117,7 @@ console.log(new TextDecoder().decode(caps));
 // Output: "pins:[1,2,3,4]"
 ```
 
-```python Python (bleak)
+```python
 import asyncio
 from bleak import BleakClient
 
@@ -128,22 +127,20 @@ async def control_gpio():
     async with BleakClient("OSSM") as client:
         # Set pin 1 HIGH
         await client.write_gatt_char(GPIO_UUID, b"1:high")
-        
+
         # Read response
         response = await client.read_gatt_char(GPIO_UUID)
         print(response.decode())  # "ok:1:high"
-        
+
         # Set pin 2 LOW
         await client.write_gatt_char(GPIO_UUID, b"2:low")
-        
+
         # Set multiple pins
         await client.write_gatt_char(GPIO_UUID, b"3:high")
         await client.write_gatt_char(GPIO_UUID, b"4:low")
 
 asyncio.run(control_gpio())
 ```
-</CodeGroup>
-
 ## Hardware integration
 
 ### Basic LED indicator
@@ -156,7 +153,7 @@ GPIO Pin → 220Ω Resistor → LED Anode (+)
 ```
 
 !!! tip
-Use a 220Ω to 470Ω resistor for standard LEDs. The ESP32's 3.3V output provides plenty of voltage for most LEDs.
+    Use a 220Ω to 470Ω resistor for standard LEDs. The ESP32's 3.3V output provides plenty of voltage for most LEDs.
 
 ### Relay control
 
@@ -171,7 +168,7 @@ GND      → Relay Module GND
 Most relay modules with optoisolation work with 3.3V logic. Check your module's specifications.
 
 !!! warning
-Never connect mains voltage (120V/240V) directly to the OSSM. Always use properly rated relay modules with appropriate safety precautions.
+    Never connect mains voltage (120V/240V) directly to the OSSM. Always use properly rated relay modules with appropriate safety precautions.
 
 ### Logic level conversion
 
@@ -194,44 +191,30 @@ GND      → Level Shifter GND
 
 ## Troubleshooting
 
-<AccordionGroup>
 ??? note "Pin doesn't respond"
-
-- Verify the BLE connection is active
-- Check the command format exactly matches `<pin>:<state>`
-- Ensure pin number is 1-4
-- Verify with a multimeter that voltage changes
+    - Verify the BLE connection is active
+    - Check the command format exactly matches `<pin>:<state>`
+    - Ensure pin number is 1-4
+    - Verify with a multimeter that voltage changes
 
 ??? note "error:invalid_format response"
+    The command format wasn't recognized. Valid formats:
+    - `1:high`, `1:low`, `1:1`, `1:0`
+    - `2:high`, `2:low`, `2:1`, `2:0`
+    - etc.
 
-The command format wasn't recognized. Valid formats:
-- `1:high`, `1:low`, `1:1`, `1:0`
-- `2:high`, `2:low`, `2:1`, `2:0`
-- etc.
-
-Case doesn't matter (`HIGH` and `high` both work).
+    Case doesn't matter (`HIGH` and `high` both work).
 
 ??? note "error:pin_out_of_range response"
-
-Pin number must be 1, 2, 3, or 4. Check your command.
+    Pin number must be 1, 2, 3, or 4. Check your command.
 
 ??? note "Connected device doesn't work"
-
-- Verify voltage with a multimeter (should be 0V or ~3.3V)
-- Check current requirements—ESP32 GPIO limited to ~12mA
-- Ensure common ground between OSSM and your device
-- Consider using a transistor or relay for higher current loads
-
-</AccordionGroup>
-
+    - Verify voltage with a multimeter (should be 0V or ~3.3V)
+    - Check current requirements—ESP32 GPIO limited to ~12mA
+    - Ensure common ground between OSSM and your device
+    - Consider using a transistor or relay for higher current loads
 ## Related pages
 
-<CardGroup cols={2}>
-<Card title="BLE Protocol" icon="bluetooth" href="/ossm/Software/communication/ble">
-  Complete BLE protocol reference for OSSM control.
-</Card>
+- **[BLE Protocol](/ossm/communication/ble)** — Complete BLE protocol reference for OSSM control.
 
-<Card title="Configuration Reference" icon="sliders" href="/ossm/Software/getting-started/configuration">
-  Pin definitions and hardware configuration.
-</Card>
-</CardGroup>
+- **[Configuration Reference](/ossm/getting-started/configuration)** — Pin definitions and hardware configuration.

@@ -9,14 +9,11 @@ The OSSM supports WiFi connectivity for over-the-air (OTA) firmware updates. Thi
 
 ### Starting WiFi setup
 
-
 ### Step 1: Navigate to WiFi Setup
-
 
 From the main menu, scroll to **WiFi Setup** and press the encoder to select it.
 
 ### Step 2: View connection instructions
-
 
 The display shows:
 
@@ -28,7 +25,6 @@ The QR code encodes: `WIFI:S:OSSM Setup;T:nopass;;`
 
 ### Step 3: Connect to the OSSM access point
 
-
 On your phone or computer:
 
 1. Open WiFi settings
@@ -36,11 +32,9 @@ On your phone or computer:
 3. Connect (no password required)
 
 !!! tip
-Scan the QR code with your phone's camera for one-tap connection on supported devices.
-
+    Scan the QR code with your phone's camera for one-tap connection on supported devices.
 
 ### Step 4: Configure your home network
-
 
 After connecting to the OSSM access point:
 
@@ -54,7 +48,6 @@ The OSSM will attempt to connect to your home network.
 
 ### Step 5: Exit WiFi setup
 
-
 Press the encoder or select **Restart** to exit WiFi setup mode. The OSSM will restart and connect to your configured network.
 
 ### Verifying connection
@@ -66,7 +59,7 @@ After restarting, the OSSM will attempt to connect to your configured WiFi netwo
 3. If WiFi is not connected, you'll be redirected to WiFi setup
 
 !!! note
-The OSSM doesn't display its IP address on screen. For advanced networking, you can find it in your router's DHCP client list or use network scanning tools.
+    The OSSM doesn't display its IP address on screen. For advanced networking, you can find it in your router's DHCP client list or use network scanning tools.
 
 ### Clearing WiFi settings
 
@@ -88,21 +81,17 @@ The OSSM can download and install firmware updates directly over WiFi, without c
 
 ### Checking for updates
 
-
 ### Step 6: Navigate to Update
-
 
 From the main menu, scroll to **Update** and press the encoder.
 
 ### Step 7: Wait for version check
-
 
 The display shows "Checking for update..." while the OSSM contacts the update server.
 
 The firmware sends its current version (`SW_VERSION`) to the server, which responds with whether an update is available.
 
 ### Step 8: Review result
-
 
 You'll see one of two screens:
 
@@ -117,7 +106,7 @@ You'll see one of two screens:
 ### During the update
 
 !!! warning
-Do not power off or disconnect your OSSM during an update. This can corrupt the firmware and require manual recovery.
+    Do not power off or disconnect your OSSM during an update. This can corrupt the firmware and require manual recovery.
 
 The update process:
 
@@ -137,7 +126,7 @@ The OSSM restarts automatically after a successful update. It will:
 3. Return to the main menu
 
 !!! success
-Your settings and WiFi configuration are preserved across updates.
+    Your settings and WiFi configuration are preserved across updates.
 
 ### Update channels
 
@@ -149,54 +138,44 @@ The OSSM firmware supports multiple update channels:
 | Development | `d2oq8yqnezqh3r.cloudfront.net` | Pre-release versions for testing |
 
 !!! note
-The update channel is determined at compile time. Production firmware checks the production server; development firmware checks the development server.
+    The update channel is determined at compile time. Production firmware checks the production server; development firmware checks the development server.
 
 ## Troubleshooting
 
-<AccordionGroup>
 ??? note "Can't find OSSM Setup network"
-
-- Ensure you're in WiFi Setup mode (screen shows QR code)
-- Move closer to the OSSM
-- Try refreshing your device's WiFi list
-- Restart the OSSM and try again
+    - Ensure you're in WiFi Setup mode (screen shows QR code)
+    - Move closer to the OSSM
+    - Try refreshing your device's WiFi list
+    - Restart the OSSM and try again
 
 ??? note "Captive portal doesn't appear"
-
-- Open a browser manually and navigate to `192.168.4.1`
-- Disable mobile data on your phone temporarily
-- Try a different device
+    - Open a browser manually and navigate to `192.168.4.1`
+    - Disable mobile data on your phone temporarily
+    - Try a different device
 
 ??? note "WiFi won't connect to home network"
-
-- Verify your WiFi password is correct
-- Ensure your network is 2.4GHz (ESP32 doesn't support 5GHz)
-- Check that your router allows new devices
-- Try moving the OSSM closer to your router
+    - Verify your WiFi password is correct
+    - Ensure your network is 2.4GHz (ESP32 doesn't support 5GHz)
+    - Check that your router allows new devices
+    - Try moving the OSSM closer to your router
 
 ??? note "Update check fails"
-
-- Verify WiFi is connected (try WiFi Setup first)
-- Check your internet connection
-- The update server may be temporarily unavailable
-- Try again in a few minutes
+    - Verify WiFi is connected (try WiFi Setup first)
+    - Check your internet connection
+    - The update server may be temporarily unavailable
+    - Try again in a few minutes
 
 ??? note "Update download fails or times out"
-
-- Ensure stable WiFi signal during update
-- Move closer to your router if needed
-- Verify your internet connection is working
-- Try again with a fresh power connection
+    - Ensure stable WiFi signal during update
+    - Move closer to your router if needed
+    - Verify your internet connection is working
+    - Try again with a fresh power connection
 
 ??? note "OSSM won't boot after update"
+    This is rare but can happen if the update was interrupted. Recovery options:
 
-This is rare but can happen if the update was interrupted. Recovery options:
-
-1. Try power cycling (unplug and replug power)
-2. If the device doesn't boot, you'll need to reflash via USB using [PlatformIO](/ossm/Software/getting-started/PlatformIO)
-
-</AccordionGroup>
-
+    1. Try power cycling (unplug and replug power)
+    2. If the device doesn't boot, you'll need to reflash via USB using [PlatformIO](/ossm/getting-started/PlatformIO)
 ## Technical details
 
 ### Update server communication
@@ -230,12 +209,6 @@ If `needUpdate` is `true`, the firmware downloads the binary from the firmware d
 
 ## Related pages
 
-<CardGroup cols={2}>
-<Card title="PlatformIO Setup" icon="wrench" href="/ossm/Software/getting-started/PlatformIO">
-  Manual firmware updates via USB for development or recovery.
-</Card>
+- **[PlatformIO Setup](/ossm/getting-started/PlatformIO)** — Manual firmware updates via USB for development or recovery.
 
-<Card title="BLE Protocol" icon="bluetooth" href="/ossm/Software/communication/ble">
-  Control your OSSM wirelessly via Bluetooth instead of WiFi.
-</Card>
-</CardGroup>
+- **[BLE Protocol](/ossm/communication/ble)** — Control your OSSM wirelessly via Bluetooth instead of WiFi.

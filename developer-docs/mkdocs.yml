@@ -5,9 +5,38 @@ repo_name: ossm
 
 theme:
   name: material
+  palette:
+    - scheme: default
+      primary: deep purple
+      accent: purple
 
 nav:
   - Overview: index.md
+  - Getting Started:
+      - Introduction: getting-started/introduction.md
+      - PlatformIO: getting-started/PlatformIO.md
+      - Configuration: getting-started/configuration.md
+      - Operating Modes: getting-started/operating-modes.md
+      - Safety Features: getting-started/safety-features.md
+      - LED Status: getting-started/LED_Status.md
+      - Hardware Tests: getting-started/hardware-tests.md
+      - Wi-Fi and Updates: getting-started/wifi-and-updates.md
+  - Architecture:
+      - Folder Structure: architecture/folder-structure.md
+      - State Machine: architecture/state-machine.md
+  - Communication:
+      - BLE: communication/ble.md
+      - GPIO: communication/gpio.md
+  - Display:
+      - Display Service: display/display-service.md
+      - UI Library: display/ui-library.md
+  - Motion:
+      - Stroke Engine: motion/stroke-engine/introduction.md
+      - Patterns: motion/stroke-engine/Pattern.md
+  - Contributing:
+      - Documentation: contributing/documentation.md
 
 markdown_extensions:
   - admonition
+  - pymdownx.superfences
+  - pymdownx.details

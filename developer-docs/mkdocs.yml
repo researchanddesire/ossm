@@ -33,8 +33,12 @@ nav:
   - Motion:
       - Stroke Engine: motion/stroke-engine/introduction.md
       - Patterns: motion/stroke-engine/Pattern.md
+  - Hardware:
+      - Specs: hardware/specs.md
+      - Bill of Materials: hardware/bom.md
   - Contributing:
       - Documentation: contributing/documentation.md
+      - License: contributing/license.md
 
 markdown_extensions:
   - admonition

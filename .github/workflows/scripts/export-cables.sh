@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-CABLE_DIR="hardware/ossm/cables"
-OUT_DIR="cable-export"
+REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+CABLE_DIR="$REPO_ROOT/hardware/ossm/cables"
+OUT_DIR="$REPO_ROOT/cable-export"
 
 mkdir -p "$OUT_DIR"
 
@@ -15,9 +16,12 @@ fi
 
 for harness in "${ymls[@]}"; do
   echo "Rendering $harness"
-  wireviz "$harness"
-  base=$(basename "$harness" .yml)
-  base=$(basename "$base" .yaml)
+  base=$(basename "$harness")
+  (
+    cd "$CABLE_DIR"
+    wireviz "$base"
+  )
+  base="${base%.*}"
   cp "$CABLE_DIR/$base.png" "$OUT_DIR/" 2>/dev/null || true
   cp "$CABLE_DIR/$base.pdf" "$OUT_DIR/" 2>/dev/null || true
 done

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
-CABLE_DIR="$REPO_ROOT/hardware/ossm/cables"
+CABLE_DIR="$REPO_ROOT/hardware/cables"
 OUT_DIR="$REPO_ROOT/cable-export"
 
 mkdir -p "$OUT_DIR"

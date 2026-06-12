@@ -1,1 +1,8 @@
 .DS_Store
+cable-export/
+hardware/ossm/cables/*.bom.tsv
+hardware/ossm/cables/*.gv
+hardware/ossm/cables/*.html
+hardware/ossm/cables/*.pdf
+hardware/ossm/cables/*.png
+hardware/ossm/cables/*.svg

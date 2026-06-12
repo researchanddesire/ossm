@@ -22,7 +22,7 @@ connectors:
     supplier: "LCSC"
     spn: "C7247"
     image:
-      src: "images/TB_1.jpeg"
+      src: "images/TB_1.png"
       caption: "Pin numbering viewed from screw head side; Pin 1 is leftmost"
       width: 350
 
@@ -31,7 +31,7 @@ connectors:
     pinlabels: ["DIR-", "DIR+", "PU-", "PU+"]
     pincolors: ["GY", "BU", "RD", "BK"]
     image:
-      src: "images/JST_PHR-04.jpeg"
+      src: "images/JST_PHR-04.png"
       caption: "Pin 1 is leftmost"
       width: 170
 
@@ -42,7 +42,7 @@ connectors:
     color: BK
     style: simple
     image:
-      src: "images/F_GND.jpeg"
+      src: "images/F_GND.png"
       caption: "GND ferrule"
       width: 120
 
@@ -53,7 +53,7 @@ connectors:
     color: RD
     style: simple
     image:
-      src: "images/F_24V.jpeg"
+      src: "images/F_24V.png"
       caption: "24V ferrule"
       width: 120
 
@@ -78,7 +78,7 @@ cables:
     wirelabels: ["GND", "24V"]
     length: 250 mm
     image:
-      src: "images/OSSM_Harness.jpeg"
+      src: "images/OSSM_Harness.png"
       caption: "Power wires bundled with signal wires using braided sleeving"
       width: 600
     additional_components:

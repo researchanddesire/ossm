@@ -15,6 +15,6 @@ Everything in this repo is **CERN-OHL-S v2** (strongly reciprocal). Do not intro
 
 ## Hardware contributions
 
-- CAD: Onshape exports only (`hardware/ossm/cad/*.step`, `ossm-asm.step`)
-- Update `hardware/ossm/bom.csv` with release
-- Wireviz: add YAML under `hardware/ossm/cables/`
+- CAD: Onshape exports only (`hardware/cad/*.step`, `ossm-asm.step`)
+- Update `hardware/bom.csv` with release
+- Wireviz: add YAML under `hardware/cables/`

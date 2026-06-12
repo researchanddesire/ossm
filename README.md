@@ -13,7 +13,7 @@ Monorepo for OSSM **firmware + hardware** under [CERN-OHL-S v2](LICENSES/CERN-OH
 ## Layout
 
 ```
-hardware/ossm/
+hardware/
 ├── bom.csv          # Bill of materials (Opulo-style CSV)
 ├── cad/             # Onshape → STEP per component + ossm-asm.step
 ├── cables/          # Wireviz source YAML
@@ -26,7 +26,7 @@ developer-docs/      # MkDocs source → dev.researchanddesire.com/ossm
 
 - **No STLs** in this repository
 - **CAD:** one STEP per release component; `ossm-asm.step` for the tagged assembly
-- **Cables:** Wireviz `.yml` in `hardware/ossm/cables/`; release workflow renders PDF harness diagrams
+- **Cables:** Wireviz `.yml` in `hardware/cables/`; release workflow renders PDF harness diagrams
 
 ## Contributing
 

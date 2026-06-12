@@ -4,14 +4,14 @@ on:
   pull_request:
     paths:
       - 'hardware/**/bom.csv'
-      - 'hardware/bom.schema.json'
+      - '.github/workflows/scripts/bom.schema.json'
       - '.github/workflows/bom-lint.yml'
       - '.github/workflows/scripts/bom_lint.py'
   push:
     branches: [main]
     paths:
       - 'hardware/**/bom.csv'
-      - 'hardware/bom.schema.json'
+      - '.github/workflows/scripts/bom.schema.json'
   workflow_dispatch:
 
 jobs:

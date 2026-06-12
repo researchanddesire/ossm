@@ -9,7 +9,7 @@ alwaysApply: false
 When creating or editing any `hardware/<product>/bom.csv`, follow the canonical RAD BOM
 standard. Full reference: https://dev.researchanddesire.com/meta/bom-standard/
 (source: `researchanddesire/dev-docs` `docs/meta/bom-standard.md` + `schemas/bom.schema.json`).
-The vendored schema lives at `hardware/bom.schema.json` — do not hand-edit it.
+The vendored schema lives at `.github/workflows/scripts/bom.schema.json` — do not hand-edit it.
 
 ## Header (exact, in this order)
 

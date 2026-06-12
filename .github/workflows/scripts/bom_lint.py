@@ -21,8 +21,9 @@ import json
 import os
 import sys
 
-REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
-SCHEMA_PATH = os.path.join(REPO_ROOT, "hardware", "bom.schema.json")
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", "..", ".."))
+SCHEMA_PATH = os.path.join(SCRIPT_DIR, "bom.schema.json")
 
 
 def load_schema(path: str) -> dict:

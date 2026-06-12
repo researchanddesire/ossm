@@ -24,15 +24,15 @@ jobs:
         run: |
           curl -fsSL \
             https://raw.githubusercontent.com/researchanddesire/dev-docs/main/schemas/bom.schema.json \
-            -o hardware/bom.schema.json
+            -o .github/workflows/scripts/bom.schema.json
       - name: Open PR if schema changed
         uses: peter-evans/create-pull-request@v6
         with:
           branch: chore/sync-bom-schema
           title: 'chore: sync BOM schema from dev-docs'
-          commit-message: 'chore: sync hardware/bom.schema.json from dev-docs'
+          commit-message: 'chore: sync bom.schema.json from dev-docs'
           body: |
-            Vendored `hardware/bom.schema.json` updated from the canonical source
+            Vendored `.github/workflows/scripts/bom.schema.json` updated from the canonical source
             in [researchanddesire/dev-docs](https://github.com/researchanddesire/dev-docs/blob/main/schemas/bom.schema.json).
 
             See the [BOM standard](https://dev.researchanddesire.com/meta/bom-standard/).

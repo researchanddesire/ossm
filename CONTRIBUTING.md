@@ -16,5 +16,5 @@ Everything in this repo is **CERN-OHL-S v2** (strongly reciprocal). Do not intro
 ## Hardware contributions
 
 - CAD: Onshape exports only (`hardware/cad/*.step`, `ossm-asm.step`)
-- Update `hardware/bom.csv` with release — follow the [BOM standard](https://dev.researchanddesire.com/meta/bom-standard/) (fixed columns, closed category codes, `–` for empty cells). The `bom-lint` check enforces it; the schema is vendored at `.github/workflows/scripts/bom.schema.json` (do not hand-edit).
+- Update `hardware/bom.csv` with release — follow the [BOM standard](https://dev.researchanddesire.com/meta/bom-standard/) (fixed columns, closed category codes, `–` for empty cells). **Anyone is welcome to edit `bom.csv` directly and push/PR — as long as `bom-lint` passes, it's good.** Only the schema is vendored read-only at `.github/workflows/scripts/bom.schema.json` (do not hand-edit).
 - Wireviz: add YAML under `hardware/cables/`

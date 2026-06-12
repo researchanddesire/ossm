@@ -53,3 +53,7 @@ The vendored schema lives at `.github/workflows/scripts/bom.schema.json` — do 
 `SLA` Stereolithography Printed Parts · `SOP` Standard Operating Procedure · `SPR` Spring · `SWI` Switch
 
 Use only these codes. To add a category, change the canonical list in `dev-docs`, not here.
+
+## Editing
+
+Editing `bom.csv` is open — humans and agents may change it directly and push/PR. The only gate is `bom-lint`: if it passes, the change is good. Only `.github/workflows/scripts/bom.schema.json` is locked (vendored, read-only).

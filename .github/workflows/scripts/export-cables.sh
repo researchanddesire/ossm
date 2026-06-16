@@ -22,6 +22,13 @@ for harness in "${ymls[@]}"; do
     wireviz "$base"
   )
   base="${base%.*}"
+  if [ -f "$CABLE_DIR/$base.gv" ] && command -v dot >/dev/null 2>&1; then
+    (
+      cd "$CABLE_DIR"
+      dot -Tpdf "$base.gv" -o "$base.pdf"
+    ) || true
+  fi
+  cp "$CABLE_DIR/$base.bom.tsv" "$OUT_DIR/" 2>/dev/null || true
   cp "$CABLE_DIR/$base.png" "$OUT_DIR/" 2>/dev/null || true
   cp "$CABLE_DIR/$base.pdf" "$OUT_DIR/" 2>/dev/null || true
 done
